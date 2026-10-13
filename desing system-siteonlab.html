@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiteOnLab — Design System</title>
+  
+  <!-- Tailwind CSS & Iconify -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            abyss: '#040807',
+            matrix: {
+              DEFAULT: '#2EC97A',
+              400: '#4AE396',
+              500: '#2EC97A',
+              600: '#1FA360',
+              900: '#0B3D25',
+              surface: '#08120E',
+              card: '#0D1A14',
+              elevated: '#13251D',
+            },
+            silver: {
+              pure: '#FFFFFF',
+              muted: '#E2E8F0',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      /* ── BACKGROUNDS ────────────────────────────── */
+      --color-bg:              #040807;
+      --color-surface-1:       #08120E;
+      --color-surface-2:       #0D1A14;
+      --color-surface-3:       #13251D;
+
+      /* ── BORDERS ────────────────────────────────── */
+      --color-border:          rgba(46, 201, 122, 0.16);
+      --color-border-subtle:   rgba(255, 255, 255, 0.08);
+      --color-border-glow:     rgba(46, 201, 122, 0.35);
+      --color-border-white:    rgba(255, 255, 255, 0.20);
+
+      /* ── ACCENTS / BIOLUMINESCENT GLOW ─────────── */
+      --color-accent:          #2EC97A; /* Neon Mint / Emerald */
+      --color-accent-hover:    #4AE396; /* Mint 400 */
+      --color-accent-dark:     #1FA360; /* Mint 600 */
+      --color-white-pure:      #FFFFFF; /* Pure White Glow */
+      --color-white-muted:     #E2E8F0;
+
+      /* ── TEXT & FOREGROUNDS ─────────────────────── */
+      --color-text:            #FFFFFF;
+      --color-text-dim:        #E2E8F0;
+      --color-text-muted:      #94A3B8;
+      --color-text-dark:       #475569;
+      --color-text-mint:       #86EFB5;
+
+      /* ── STATUS & SEMÂNTICA ─────────────────────── */
+      --color-success:         #2EC97A;
+      --color-info:            #E2E8F0;
+      --color-warning:         #F59E0B;
+      --color-error:           #EF4444;
+
+      /* ── TYPOGRAPHY ─────────────────────────────── */
+      --font-sans:             'Inter', -apple-system, sans-serif;
+      --font-mono:             'JetBrains Mono', monospace;
+
+      /* ── SHADOWS ────────────────────────────────── */
+      --shadow-surface:        0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(46, 201, 122, 0.16);
+      --shadow-glow:           0 0 25px rgba(46, 201, 122, 0.35);
+      --shadow-glow-white:     0 0 25px rgba(255, 255, 255, 0.25);
+
+      /* ── RADIUS ─────────────────────────────────── */
+      --radius-sm:             6px;
+      --radius-md:             10px;
+      --radius-lg:             16px;
+      --radius-xl:             24px;
+      --radius-pill:           9999px;
+    }
+
+    body {
+      background-color: #040807;
+      color: #E2E8F0;
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    ::selection {
+      background: rgba(46, 201, 122, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* Ambient scanline texture */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,
+        transparent 1px, transparent 2px
+      );
+    }
+
+    /* Glassmorphism Surface Panels */
+    .glass-panel {
+      background: rgba(13, 26, 20, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(46, 201, 122, 0.16);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .glass-panel-glow {
+      background: rgba(8, 18, 14, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(46, 201, 122, 0.28);
+      box-shadow: 0 0 30px rgba(46, 201, 122, 0.12), inset 0 0 20px rgba(46, 201, 122, 0.04);
+    }
+
+    /* Laser light beam vertical central */
+    .laser-beam {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 140%;
+      background: linear-gradient(180deg, transparent 0%, #2EC97A 30%, #FFFFFF 65%, transparent 100%);
+      box-shadow: 0 0 40px 10px rgba(46, 201, 122, 0.4), 0 0 80px 25px rgba(255, 255, 255, 0.25);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    /* Ambient radial glow */
+    .quantum-glow {
+      background: radial-gradient(ellipse 60% 80% at 50% 10%, rgba(46, 201, 122, 0.16) 0%, rgba(255, 255, 255, 0.08) 35%, transparent 70%);
+    }
+
+    /* Pill Buttons */
+    .btn-pill-primary {
+      background: linear-gradient(135deg, #2EC97A 0%, #1FA37E 100%);
+      color: #04100B;
+      font-weight: 700;
+      border-radius: 9999px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 25px rgba(46, 201, 122, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+
+    .btn-pill-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 0 35px rgba(46, 201, 122, 0.6), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    .btn-pill-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(46, 201, 122, 0.2);
+      border-radius: 9999px;
+      color: #FFFFFF;
+      transition: all 0.2s;
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-pill-secondary:hover {
+      border-color: #2EC97A;
+      color: #2EC97A;
+      background: rgba(46, 201, 122, 0.08);
+      box-shadow: 0 0 15px rgba(46, 201, 122, 0.2);
+    }
+
+    /* Code Blocks */
+    pre {
+      background: #08120E !important;
+      border: 1px solid rgba(46, 201, 122, 0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #E2E8F0;
+    }
+    .k { color: #2EC97A; }
+    .v { color: #86EFB5; }
+    .c { color: #475569; }
+    .s { color: #F8FAFC; }
+
+    /* Custom Toast */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      background: #0D1A14; border: 1px solid #2EC97A; border-radius: 9999px;
+      padding: 10px 24px; font-size: 11px; font-family: var(--font-mono);
+      color: #2EC97A; letter-spacing: 0.08em; text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(46, 201, 122, 0.35);
+      transform: translateY(60px); opacity: 0;
+      transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body class="antialiased relative min-h-screen">
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast">// COPIADO PARA A ÁREA DE TRANSFERÊNCIA</div>
+
+  <!-- FIXED SIDEBAR NAVIGATION -->
+  <aside class="fixed left-0 top-0 bottom-0 w-12 bg-[#08120E]/90 border-r border-emerald-950/60 backdrop-blur-md flex flex-col items-center py-5 gap-2 z-50">
+    <a href="#colors" class="w-7 h-7 rounded-md border border-emerald-900/50 flex items-center justify-center text-[10px] font-mono text-zinc-500 hover:text-matrix hover:border-matrix hover:bg-matrix/10 transition-all" title="01 Cores">01</a>
+    <a href="#typography" class="w-7 h-7 rounded-md border border-emerald-900/50 flex items-center justify-center text-[10px] font-mono text-zinc-500 hover:text-matrix hover:border-matrix hover:bg-matrix/10 transition-all" title="02 Tipografia">02</a>
+    <a href="#spacing" class="w-7 h-7 rounded-md border border-emerald-900/50 flex items-center justify-center text-[10px] font-mono text-zinc-500 hover:text-matrix hover:border-matrix hover:bg-matrix/10 transition-all" title="03 Espaçamento">03</a>
+    <a href="#radius" class="w-7 h-7 rounded-md border border-emerald-900/50 flex items-center justify-center text-[10px] font-mono text-zinc-500 hover:text-matrix hover:border-matrix hover:bg-matrix/10 transition-all" title="04 Radius">04</a>
+    <a href="#components" class="w-7 h-7 rounded-md border border-emerald-900/50 flex items-center justify-center text-[10px] font-mono text-zinc-500 hover:text-matrix hover:border-matrix hover:bg-matrix/10 transition-all" title="05 Componentes">05</a>
+    <div class="w-px flex-1 bg-emerald-950/60 my-2"></div>
+    <a href="#tokens" class="w-7 h-7 rounded-md border border-emerald-900/50 flex items-center justify-center text-[9px] font-mono text-matrix bg-matrix/5" title="Tokens">TK</a>
+  </aside>
+
+  <!-- TOPBAR HEADER -->
+  <header class="fixed top-0 left-12 right-0 h-14 bg-[#040807]/80 border-b border-emerald-950/60 backdrop-blur-xl flex items-center justify-between px-8 z-40">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-matrix to-white flex items-center justify-center text-black font-black text-xs shadow-[0_0_15px_rgba(46, 201, 122,0.5)]">
+          ⚡
+        </div>
+        <span class="text-sm font-bold tracking-tight text-white uppercase tracking-wider">SiteOnLab<span class="text-matrix">.DS</span></span>
+      </div>
+      <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full border border-matrix/20 bg-matrix/5 text-[10px] font-mono text-matrix">
+        <span class="w-1.5 h-1.5 rounded-full bg-matrix animate-pulse shadow-[0_0_8px_#2EC97A]"></span>
+        AMBIENTE: DESIGN_SYSTEM
+      </div>
+    </div>
+
+    <nav class="hidden md:flex items-center gap-8 text-[11px] font-mono uppercase tracking-widest text-zinc-400">
+      <a href="#colors" class="hover:text-matrix transition-colors">Cores</a>
+      <a href="#typography" class="hover:text-matrix transition-colors">Tipografia</a>
+      <a href="#spacing" class="hover:text-matrix transition-colors">Espaçamento</a>
+      <a href="#components" class="hover:text-matrix transition-colors">Componentes</a>
+      <a href="#tokens" class="hover:text-matrix transition-colors">Tokens</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <button onclick="document.getElementById('tokens').scrollIntoView({behavior:'smooth'})" class="px-4 py-1.5 rounded-full border border-matrix/30 bg-matrix/10 text-matrix hover:bg-matrix hover:text-black text-[11px] font-mono font-semibold transition-all shadow-[0_0_15px_rgba(46, 201, 122,0.2)]">
+        → Copiar Tokens
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="ml-12 pt-14">
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[75vh] flex items-center justify-center px-6 py-20 overflow-hidden border-b border-emerald-950/60">
+      <div class="absolute inset-0 quantum-glow pointer-events-none"></div>
+
+      <!-- Cyber Grid -->
+      <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(#2EC97A 1px, transparent 1px), linear-gradient(90deg, #2EC97A 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+      <div class="max-w-5xl mx-auto text-center relative z-10">
+        <!-- Status Pill -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-matrix/30 bg-matrix/5 backdrop-blur-md text-matrix text-[11px] font-mono font-semibold uppercase tracking-wider mb-8 shadow-[0_0_20px_rgba(46, 201, 122,0.15)]">
+          <span class="w-2 h-2 rounded-full bg-matrix animate-ping"></span>
+          Sistema Operacional // Identidade Visual Oficial
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 leading-[1.05]">
+          Design System <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-matrix via-emerald-100 to-white drop-shadow-[0_0_35px_rgba(46, 201, 122,0.4)]">
+            SiteOnLab.
+          </span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto font-normal leading-relaxed mb-10">
+          Guia de estilo e tokens visuais do SiteOnLab. Superfícies translúcidas em vidro escuro, 
+          bioluminescência neon esmeralda/ciano, tipografia técnica e componentes modulares prontos para uso.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap justify-center items-center gap-4">
+          <button onclick="document.getElementById('tokens').scrollIntoView({behavior:'smooth'})" class="btn-pill-primary px-8 py-3.5 text-xs tracking-wider uppercase inline-flex items-center gap-2">
+            <span>Copiar Tokens CSS</span>
+            <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+          </button>
+          <button onclick="document.getElementById('components').scrollIntoView({behavior:'smooth'})" class="btn-pill-secondary px-8 py-3.5 text-xs font-semibold tracking-wider uppercase inline-flex items-center gap-2">
+            <span>Explorar Componentes ⊡</span>
+          </button>
+        </div>
+
+        <!-- Metric Metadata Row -->
+        <div class="flex flex-wrap justify-center gap-6 mt-14 text-[11px] font-mono text-zinc-500">
+          <span class="flex items-center gap-1.5"><span class="text-matrix">■</span> 14 TOKENS EXTRAÍDOS</span>
+          <span class="flex items-center gap-1.5"><span class="text-matrix">■</span> INTER + JETBRAINS MONO</span>
+          <span class="flex items-center gap-1.5"><span class="text-matrix">■</span> 4PX BASE SPACING UNIT</span>
+          <span class="flex items-center gap-1.5"><span class="text-matrix">■</span> GLASSMORPHISM &amp; NEON GLOW</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT SECTIONS -->
+    <div class="max-w-6xl mx-auto px-6 py-20 space-y-28">
+
+      <!-- 01 — CORES -->
+      <section id="colors" class="space-y-8">
+        <div class="flex items-baseline gap-4 border-b border-emerald-950/60 pb-4">
+          <span class="text-xs font-mono font-bold text-matrix bg-matrix/10 border border-matrix/20 px-2.5 py-1 rounded">01</span>
+          <h2 class="text-2xl font-bold tracking-tight text-white uppercase">Sistema de Cores</h2>
+          <span class="text-xs font-mono text-zinc-500 ml-auto">// 14 Tokens</span>
+        </div>
+
+        <!-- Acentos Neon -->
+        <div>
+          <div class="text-[10px] font-mono uppercase tracking-widest text-matrix mb-3">⚡ Acentos &amp; Luz Bioluminescente</div>
+          <div class="grid grid-cols-1 sm:grid-cols-4 rounded-2xl overflow-hidden border border-matrix/30 shadow-[0_0_30px_rgba(46, 201, 122,0.15)]">
+            <div class="p-6 bg-[#2EC97A] cursor-pointer hover:opacity-90 transition-opacity" onclick="copyText('#2EC97A')">
+              <div class="text-black font-mono font-bold text-sm">#2EC97A</div>
+              <div class="text-black/70 text-[10px] font-mono uppercase mt-1">neon-mint · CTA Primário</div>
+            </div>
+            <div class="p-6 bg-[#4AE396] cursor-pointer hover:opacity-90 transition-opacity" onclick="copyText('#4AE396')">
+              <div class="text-black font-mono font-bold text-sm">#4AE396</div>
+              <div class="text-black/70 text-[10px] font-mono uppercase mt-1">mint-400 · Hover</div>
+            </div>
+            <div class="p-6 bg-[#FFFFFF] cursor-pointer hover:opacity-90 transition-opacity" onclick="copyText('#FFFFFF')">
+              <div class="text-black font-mono font-bold text-sm">#FFFFFF</div>
+              <div class="text-black/70 text-[10px] font-mono uppercase mt-1">pure-white Â· Feixe &amp; Destaque</div>
+            </div>
+            <div class="p-6 bg-[#0B3D25] cursor-pointer hover:opacity-90 transition-opacity" onclick="copyText('#0B3D25')">
+              <div class="text-white font-mono font-bold text-sm">#0B3D25</div>
+              <div class="text-matrix text-[10px] font-mono uppercase mt-1">emerald-900 · Superfície Profunda</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backgrounds & Surfaces -->
+        <div>
+          <div class="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mb-3">Bases &amp; Superfícies</div>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <div class="glass-panel p-4 rounded-xl cursor-pointer hover:border-matrix transition-all" onclick="copyText('#040807')">
+              <div class="h-12 rounded-lg bg-[#040807] border border-white/5 mb-3"></div>
+              <div class="font-mono text-xs font-bold text-white">#040807</div>
+              <div class="text-[10px] text-zinc-500 uppercase mt-0.5">bg-abyss</div>
+            </div>
+            <div class="glass-panel p-4 rounded-xl cursor-pointer hover:border-matrix transition-all" onclick="copyText('#08120E')">
+              <div class="h-12 rounded-lg bg-[#08120E] border border-emerald-950 mb-3"></div>
+              <div class="font-mono text-xs font-bold text-white">#08120E</div>
+              <div class="text-[10px] text-zinc-500 uppercase mt-0.5">surface-1</div>
+            </div>
+            <div class="glass-panel p-4 rounded-xl cursor-pointer hover:border-matrix transition-all" onclick="copyText('#0D1A14')">
+              <div class="h-12 rounded-lg bg-[#0D1A14] border border-emerald-950 mb-3"></div>
+              <div class="font-mono text-xs font-bold text-white">#0D1A14</div>
+              <div class="text-[10px] text-zinc-500 uppercase mt-0.5">surface-2 (cards)</div>
+            </div>
+            <div class="glass-panel p-4 rounded-xl cursor-pointer hover:border-matrix transition-all" onclick="copyText('#13251D')">
+              <div class="h-12 rounded-lg bg-[#13251D] border border-emerald-950 mb-3"></div>
+              <div class="font-mono text-xs font-bold text-white">#13251D</div>
+              <div class="text-[10px] text-zinc-500 uppercase mt-0.5">surface-3 (hover)</div>
+            </div>
+            <div class="glass-panel p-4 rounded-xl cursor-pointer hover:border-matrix transition-all" onclick="copyText('#1A372B')">
+              <div class="h-12 rounded-lg bg-[#1A372B] border border-emerald-800/40 mb-3"></div>
+              <div class="font-mono text-xs font-bold text-white">#1A372B</div>
+              <div class="text-[10px] text-zinc-500 uppercase mt-0.5">card-highlight</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Semântica & Status -->
+        <div>
+          <div class="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mb-3">Status / Semântica</div>
+          <div class="flex flex-wrap gap-3">
+            <div class="glass-panel px-4 py-2.5 rounded-full flex items-center gap-2.5 cursor-pointer hover:border-matrix" onclick="copyText('#2EC97A')">
+              <span class="w-2 h-2 rounded-full bg-matrix shadow-[0_0_8px_#2EC97A]"></span>
+              <span class="text-xs font-mono text-matrix">#2EC97A — ONLINE / SUCESSO</span>
+            </div>
+            <div class="glass-panel px-4 py-2.5 rounded-full flex items-center gap-2.5 cursor-pointer hover:border-white" onclick="copyText('#FFFFFF')">
+              <span class="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#FFFFFF]"></span>
+              <span class="text-xs font-mono text-white">#FFFFFF â€” INFO / BRANCO PURO</span>
+            </div>
+            <div class="glass-panel px-4 py-2.5 rounded-full flex items-center gap-2.5 cursor-pointer hover:border-amber-400" onclick="copyText('#F59E0B')">
+              <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#F59E0B]"></span>
+              <span class="text-xs font-mono text-amber-400">#F59E0B — ALERTA / DESTAQUE</span>
+            </div>
+            <div class="glass-panel px-4 py-2.5 rounded-full flex items-center gap-2.5 cursor-pointer hover:border-red-500" onclick="copyText('#EF4444')">
+              <span class="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#EF4444]"></span>
+              <span class="text-xs font-mono text-red-400">#EF4444 — ERRO / ATENÇÃO</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 — TIPOGRAFIA -->
+      <section id="typography" class="space-y-8">
+        <div class="flex items-baseline gap-4 border-b border-emerald-950/60 pb-4">
+          <span class="text-xs font-mono font-bold text-matrix bg-matrix/10 border border-matrix/20 px-2.5 py-1 rounded">02</span>
+          <h2 class="text-2xl font-bold tracking-tight text-white uppercase">Tipografia</h2>
+          <span class="text-xs font-mono text-zinc-500 ml-auto">// Inter &amp; JetBrains Mono</span>
+        </div>
+
+        <div class="glass-panel p-8 sm:p-10 rounded-2xl">
+          <h3 class="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-2">
+            Inter <span class="text-matrix">&amp; Mono</span>
+          </h3>
+          <p class="font-mono text-xs text-zinc-500 mb-8">'Inter', -apple-system, sans-serif + 'JetBrains Mono', monospace</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-emerald-950/60">
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-widest text-matrix mb-2">Regular (400) — Textos &amp; Parágrafos</p>
+              <p class="text-base text-slate-300 leading-relaxed font-normal">
+                Estrutura textual clara, altamente legível e moderna para descrição de serviços e propostas de valor.
+              </p>
+            </div>
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-widest text-matrix mb-2">SemiBold (600) — UI &amp; CTAs</p>
+              <p class="text-base text-white font-semibold">
+                Quero Meu Site Profissional No Ar →
+              </p>
+            </div>
+            <div>
+              <p class="text-[10px] font-mono uppercase tracking-widest text-matrix mb-2">Mono (500) — Badges &amp; Métricas</p>
+              <p class="font-mono text-lg text-matrix font-medium">
+                +500 CLIENTES <span class="text-xs text-slate-400">99.9% UPTIME</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 — ESPAÇAMENTO -->
+      <section id="spacing" class="space-y-8">
+        <div class="flex items-baseline gap-4 border-b border-emerald-950/60 pb-4">
+          <span class="text-xs font-mono font-bold text-matrix bg-matrix/10 border border-matrix/20 px-2.5 py-1 rounded">03</span>
+          <h2 class="text-2xl font-bold tracking-tight text-white uppercase">Escala de Espaçamento</h2>
+          <span class="text-xs font-mono text-zinc-500 ml-auto">// Unidade Base: 4px</span>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl space-y-3 font-mono text-xs">
+          <div class="flex items-center gap-4 py-2 px-3 rounded hover:bg-matrix/5 transition-colors">
+            <span class="w-24 text-matrix">--space-1</span>
+            <span class="w-12 text-zinc-400">4px</span>
+            <div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-matrix" style="width: 4px"></div></div>
+          </div>
+          <div class="flex items-center gap-4 py-2 px-3 rounded hover:bg-matrix/5 transition-colors">
+            <span class="w-24 text-matrix">--space-2</span>
+            <span class="w-12 text-zinc-400">8px</span>
+            <div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-matrix" style="width: 8px"></div></div>
+          </div>
+          <div class="flex items-center gap-4 py-2 px-3 rounded hover:bg-matrix/5 transition-colors">
+            <span class="w-24 text-matrix">--space-4</span>
+            <span class="w-12 text-zinc-400">16px</span>
+            <div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-matrix" style="width: 16px"></div></div>
+          </div>
+          <div class="flex items-center gap-4 py-2 px-3 rounded hover:bg-matrix/5 transition-colors">
+            <span class="w-24 text-matrix">--space-6</span>
+            <span class="w-12 text-zinc-400">24px</span>
+            <div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-matrix" style="width: 24px"></div></div>
+          </div>
+          <div class="flex items-center gap-4 py-2 px-3 rounded hover:bg-matrix/5 transition-colors">
+            <span class="w-24 text-matrix">--space-8</span>
+            <span class="w-12 text-zinc-400">32px</span>
+            <div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-matrix" style="width: 32px"></div></div>
+          </div>
+          <div class="flex items-center gap-4 py-2 px-3 rounded hover:bg-matrix/5 transition-colors">
+            <span class="w-24 text-matrix">--space-12</span>
+            <span class="w-12 text-zinc-400">48px</span>
+            <div class="flex-1 h-1.5 bg-zinc-800 rounded-full overflow-hidden"><div class="h-full bg-matrix" style="width: 48px"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 — BORDER RADIUS -->
+      <section id="radius" class="space-y-8">
+        <div class="flex items-baseline gap-4 border-b border-emerald-950/60 pb-4">
+          <span class="text-xs font-mono font-bold text-matrix bg-matrix/10 border border-matrix/20 px-2.5 py-1 rounded">04</span>
+          <h2 class="text-2xl font-bold tracking-tight text-white uppercase">Border Radius</h2>
+          <span class="text-xs font-mono text-zinc-500 ml-auto">// Curvaturas do Estilo</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+          <div class="glass-panel p-6 rounded-xl text-center">
+            <div class="w-12 h-12 mx-auto mb-3 bg-matrix/10 border border-matrix rounded-[6px]"></div>
+            <div class="font-mono text-xs font-bold text-matrix">6px</div>
+            <div class="text-[10px] text-zinc-500 uppercase mt-1">sm · chips</div>
+          </div>
+          <div class="glass-panel p-6 rounded-xl text-center">
+            <div class="w-12 h-12 mx-auto mb-3 bg-matrix/10 border border-matrix rounded-[10px]"></div>
+            <div class="font-mono text-xs font-bold text-matrix">10px</div>
+            <div class="text-[10px] text-zinc-500 uppercase mt-1">md · inputs</div>
+          </div>
+          <div class="glass-panel p-6 rounded-xl text-center">
+            <div class="w-12 h-12 mx-auto mb-3 bg-matrix/10 border border-matrix rounded-[16px]"></div>
+            <div class="font-mono text-xs font-bold text-matrix">16px</div>
+            <div class="text-[10px] text-zinc-500 uppercase mt-1">lg · cards</div>
+          </div>
+          <div class="glass-panel p-6 rounded-xl text-center">
+            <div class="w-12 h-12 mx-auto mb-3 bg-matrix/10 border border-matrix rounded-[24px]"></div>
+            <div class="font-mono text-xs font-bold text-matrix">24px</div>
+            <div class="text-[10px] text-zinc-500 uppercase mt-1">xl · painéis</div>
+          </div>
+          <div class="glass-panel p-6 rounded-xl text-center">
+            <div class="w-12 h-12 mx-auto mb-3 bg-matrix/10 border border-matrix rounded-full"></div>
+            <div class="font-mono text-xs font-bold text-matrix">9999px</div>
+            <div class="text-[10px] text-zinc-500 uppercase mt-1">pill · botões</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 — COMPONENTES UI (GENÉRICOS DO SITEONLAB) -->
+      <section id="components" class="space-y-8">
+        <div class="flex items-baseline gap-4 border-b border-emerald-950/60 pb-4">
+          <span class="text-xs font-mono font-bold text-matrix bg-matrix/10 border border-matrix/20 px-2.5 py-1 rounded">05</span>
+          <h2 class="text-2xl font-bold tracking-tight text-white uppercase">Mostruário de Componentes</h2>
+          <span class="text-xs font-mono text-zinc-500 ml-auto">// Visual Aplicado</span>
+        </div>
+
+        <!-- Botões -->
+        <div class="glass-panel p-8 rounded-2xl space-y-4">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-matrix">Botões Pill &amp; Glow</div>
+          <div class="flex flex-wrap items-center gap-4">
+            <button class="btn-pill-primary px-8 py-3.5 text-xs tracking-wider uppercase inline-flex items-center gap-2">
+              <span>Ação Principal →</span>
+            </button>
+            <button class="px-8 py-3.5 rounded-full bg-gradient-to-r from-white to-zinc-200 text-black text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(255,255,255,0.35)] hover:brightness-110 transition-all">
+              <span>Ação Destacada ⚡</span>
+            </button>
+            <button class="btn-pill-secondary px-8 py-3.5 text-xs font-medium tracking-wider uppercase inline-flex items-center gap-2">
+              <span>Ação Secundária ⊡</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Badges & Indicadores -->
+        <div class="glass-panel p-8 rounded-2xl space-y-4">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-matrix">Badges &amp; Indicadores de Status</div>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-matrix/30 bg-matrix/5 text-matrix text-[11px] font-mono font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-matrix shadow-[0_0_8px_#2EC97A] animate-pulse"></span>
+              SISTEMA ATIVO
+            </span>
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/30 bg-white/5 text-white text-[11px] font-mono font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_#FFFFFF]"></span>
+              CARREGAMENTO RÁPIDO
+            </span>
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-zinc-300 text-[11px] font-mono">
+              VERSÃO 2.0
+            </span>
+          </div>
+        </div>
+
+        <!-- Cards de Conteúdo & Destaque -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="glass-panel p-8 rounded-2xl">
+            <div class="w-10 h-10 rounded-xl bg-matrix/10 border border-matrix/30 text-matrix flex items-center justify-center text-lg mb-4 shadow-[0_0_15px_rgba(46, 201, 122,0.2)]">
+              ⚡
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Card de Recurso</h3>
+            <p class="text-sm text-slate-400 leading-relaxed mb-6">
+              Exemplo de card com superfície escura glassmórfica, borda verde-esmeralda sutil de 1px e efeito de elevação no hover.
+            </p>
+            <div class="text-xs font-mono text-matrix">DETALHES DO MÓDULO →</div>
+          </div>
+
+          <div class="glass-panel-glow p-8 rounded-2xl flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400">MÉTRICA / DESEMPENHO</span>
+                <span class="text-xs font-mono text-matrix font-bold">+100% OTIMIZADO</span>
+              </div>
+              <div class="text-3xl font-extrabold text-white mb-2">Presença Ativa</div>
+              <p class="text-sm text-slate-400">Card com brilho bioluminescente interno reforçado para destacar itens prioritários.</p>
+            </div>
+            <div class="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden mt-6">
+              <div class="h-full bg-gradient-to-r from-matrix to-white w-3/4 shadow-[0_0_10px_#2EC97A]"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 — TOKENS COMPLETOS -->
+      <section id="tokens" class="space-y-8">
+        <div class="flex items-baseline gap-4 border-b border-emerald-950/60 pb-4">
+          <span class="text-xs font-mono font-bold text-matrix bg-matrix/10 border border-matrix/20 px-2.5 py-1 rounded">TK</span>
+          <h2 class="text-2xl font-bold tracking-tight text-white uppercase">Tokens CSS Globais</h2>
+          <span class="text-xs font-mono text-zinc-500 ml-auto">// :root Variables</span>
+        </div>
+
+        <div class="relative">
+          <button onclick="copyTokens()" class="absolute top-4 right-4 px-4 py-2 rounded-lg bg-matrix/10 border border-matrix/30 text-matrix text-xs font-mono font-semibold hover:bg-matrix hover:text-black transition-all">
+            COPIAR TODOS OS TOKENS
+          </button>
+          <pre id="tokens-code"><code><span class="c">/**
+ * SiteOnLab Design System — Variáveis CSS
+ * Estilo visual extraído de matrixpay-finance.aura.build
+ */</span>
+
+:root {
+  <span class="c">/* ── PALETA DE CORES ─────────────────── */</span>
+  <span class="k">--color-bg</span>:            <span class="v">#040807</span>;
+  <span class="k">--color-surface-1</span>:     <span class="v">#08120E</span>;
+  <span class="k">--color-surface-2</span>:     <span class="v">#0D1A14</span>;
+  <span class="k">--color-surface-3</span>:     <span class="v">#13251D</span>;
+  
+  <span class="c">/* ── ACENTOS NEON ───────────────────── */</span>
+  <span class="k">--color-neon-mint</span>:     <span class="v">#2EC97A</span>; <span class="c">/* CTA Principal */</span>
+  <span class="k">--color-mint-hover</span>:    <span class="v">#4AE396</span>;
+  <span class="k">--color-mint-dark</span>:     <span class="v">#1FA360</span>;
+  <span class="k">--color-white-pure</span>:    <span class="v">#FFFFFF</span>; <span class="c">/* Feixe &amp; Destaques */</span>
+  
+  <span class="c">/* ── STATUS &amp; SEMÂNTICA ─────────────── */</span>
+  <span class="k">--color-success</span>:       <span class="v">#2EC97A</span>;
+  <span class="k">--color-info</span>:          <span class="v">#E2E8F0</span>;
+  <span class="k">--color-warning</span>:       <span class="v">#F59E0B</span>;
+  <span class="k">--color-error</span>:         <span class="v">#EF4444</span>;
+
+  <span class="c">/* ── TIPOGRAFIA ──────────────────────── */</span>
+  <span class="k">--font-sans</span>: <span class="s">'Inter'</span>, sans-serif;
+  <span class="k">--font-mono</span>: <span class="s">'JetBrains Mono'</span>, monospace;
+
+  <span class="c">/* ── BORDAS &amp; GLASSMORPHISM ─────────── */</span>
+  <span class="k">--border-emerald</span>:      <span class="v">rgba(46, 201, 122, 0.16)</span>;
+  <span class="k">--border-glow</span>:         <span class="v">rgba(46, 201, 122, 0.35)</span>;
+
+  <span class="c">/* ── BIOLUMINESCÊNCIA &amp; SOMBRAS ─────── */</span>
+  <span class="k">--shadow-glow-mint</span>:    <span class="v">0 0 35px rgba(46, 201, 122, 0.40)</span>;
+  <span class="k">--shadow-white-beam</span>:   <span class="v">0 0 35px rgba(255, 255, 255, 0.30)</span>;
+  <span class="k">--shadow-card-dark</span>:    <span class="v">0 20px 40px -15px rgba(0, 0, 0, 0.8)</span>;
+}
+</code></pre>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="border-t border-emerald-950/60 py-12 ml-12 text-center text-xs font-mono text-zinc-600">
+    SiteOnLab Design System // Estilo Visual Bioluminescente © 2026
+  </footer>
+
+  <script>
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    function copyText(val) {
+      navigator.clipboard.writeText(val).then(() => showToast('// ' + val + ' COPIADO'));
+    }
+
+    function copyTokens() {
+      const code = document.getElementById('tokens-code').innerText;
+      navigator.clipboard.writeText(code).then(() => showToast('// TOKENS CSS COPIADOS!'));
+    }
+  </script>
+</body>
+</html>
+
+

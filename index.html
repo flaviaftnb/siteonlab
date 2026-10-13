@@ -1,0 +1,2764 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiteOnLab — Tenha um Site Profissional por Assinatura</title>
+  <meta name="description" content="Pare de depender apenas de indicações: Tenha um site profissional que coloca sua empresa no Google e fecha clientes pelo WhatsApp. Sem fidelidade, cancele quando quiser.">
+  <meta name="referrer" content="origin-when-cross-origin">
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1094445129838384');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1094445129838384&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- Tailwind CSS & Iconify -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.0.0/iconify-icon.min.js"></script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            abyss: '#040807',
+            matrix: {
+              DEFAULT: '#2EC97A',
+              400: '#4AE396',
+              500: '#2EC97A',
+              600: '#1FA360',
+              900: '#0B3D25',
+              surface: '#08120E',
+              card: '#0D1A14',
+              elevated: '#13251D',
+            },
+            silver: {
+              pure: '#FFFFFF',
+              muted: '#E2E8F0',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --color-bg:              #040807;
+      --color-surface-1:       #08120E;
+      --color-surface-2:       #0D1A14;
+      --color-surface-3:       #13251D;
+      --color-border:          rgba(46, 201, 122, 0.16);
+      --color-border-subtle:   rgba(255, 255, 255, 0.08);
+      --color-border-glow:     rgba(46, 201, 122, 0.35);
+      --color-accent:          #2EC97A;
+      --color-accent-hover:    #4AE396;
+      --color-accent-dark:     #1FA360;
+      --color-white-pure:      #FFFFFF;
+      --color-white-muted:     #E2E8F0;
+      --font-sans:             'Inter', -apple-system, sans-serif;
+      --font-mono:             'JetBrains Mono', monospace;
+    }
+
+    body {
+      background-color: #040807;
+      color: #E2E8F0;
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    ::selection {
+      background: rgba(46, 201, 122, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* Subtle ambient scanline texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.02) 0px,
+        rgba(0,0,0,0.02) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #040807; }
+    ::-webkit-scrollbar-thumb { background: #13251D; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #1FA360; }
+
+    /* Glass Panels with Design System Green & White borders */
+    .glass-panel-green {
+      background: rgba(13, 26, 20, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(46, 201, 122, 0.22);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(46, 201, 122, 0.05);
+    }
+
+    .hero-spotlight {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-spotlight::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(46, 201, 122, 0.15), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+
+    .hero-spotlight:hover::before {
+      opacity: 1;
+    }
+
+    /* Pill Buttons per Design System */
+    .btn-pill-primary {
+      background: linear-gradient(135deg, #2EC97A 0%, #1FA37E 100%);
+      color: #04100B;
+      font-weight: 700;
+      border-radius: 9999px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 25px rgba(46, 201, 122, 0.35), inset 0 1px 0 rgba(255,255,255,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-pill-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: brightness(1.1);
+      box-shadow: 0 0 35px rgba(46, 201, 122, 0.55), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    .btn-pill-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(46, 201, 122, 0.25);
+      border-radius: 9999px;
+      color: #FFFFFF;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-pill-secondary:hover {
+      border-color: #2EC97A;
+      color: #2EC97A;
+      background: rgba(46, 201, 122, 0.08);
+      box-shadow: 0 0 20px rgba(46, 201, 122, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Keyframe Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-16px) rotate(1.5deg); }
+    }
+
+    @keyframes float-reverse {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(16px) rotate(-1.5deg); }
+    }
+
+    .anim-float { animation: float 7s ease-in-out infinite; }
+    .anim-float-rev { animation: float-reverse 9s ease-in-out infinite; }
+
+    @keyframes energy-wave {
+      0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.2; }
+      50% { transform: translateY(-10%) scaleY(1.15); opacity: 0.5; }
+    }
+
+    @keyframes particle-rise {
+      0% { transform: translateY(100vh); opacity: 0; }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(-20vh); opacity: 0; }
+    }
+
+    @keyframes ping-slow {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    @keyframes pulse-bar {
+      0%, 100% { height: 35%; }
+      50% { height: 95%; }
+    }
+    @keyframes pulse-bar-2 {
+      0%, 100% { height: 60%; }
+      50% { height: 25%; }
+    }
+    @keyframes pulse-bar-3 {
+      0%, 100% { height: 45%; }
+      50% { height: 85%; }
+    }
+
+    @keyframes scroll-probe {
+      0% { transform: translateY(-100%); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(200%); opacity: 0; }
+    }
+
+    .typewriter-cursor::after {
+      content: '|';
+      display: inline-block;
+      color: #2EC97A;
+      animation: blink 0.9s infinite;
+      margin-left: 2px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Tech Card Opening Animation (Esquerda) com Efeito de Foco/Desfoque */
+    .cards-container:has(.card-opening.is-active) .card-opening:not(.is-active) {
+      filter: blur(2.5px);
+      opacity: 0.35;
+      transform: scale(0.97);
+    }
+    .card-opening {
+      opacity: 0;
+      transform: translateX(-40px) scale(0.96);
+      transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-opening.is-visible {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+    .card-opening.is-active {
+      filter: blur(0px) !important;
+      opacity: 1 !important;
+      transform: translateX(6px) scale(1.02) !important;
+      box-shadow: 0 20px 45px -10px rgba(0,0,0,0.9), 0 0 30px rgba(46,201,122,0.25) !important;
+    }
+    .card-opening:hover {
+      filter: blur(0px) !important;
+      opacity: 1 !important;
+      transform: translateX(6px) scale(1.02);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), 0 0 25px rgba(46,201,122,0.22);
+    }
+
+    /* Tech Branch Circuit Lines Estendidas */
+    .tech-branch-line {
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      transition: stroke-dashoffset 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tech-branch-line.is-visible {
+      stroke-dashoffset: 0;
+    }
+
+    /* Truth Reveal Scroll Animation */
+    .truth-reveal {
+      opacity: 0;
+      transform: translateY(35px) scale(0.98);
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .truth-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Container Fixo Sticky para a Seção Solução */
+    @media (min-width: 768px) {
+      .container-fixo {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 100px !important;
+        align-self: flex-start !important;
+        z-index: 10;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-matrix/20 selection:text-white relative bg-[#040807]">
+
+  <!-- NAVIGATION HEADER -->
+  <header class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+    <div class="absolute inset-0 bg-[#040807]/75 backdrop-blur-xl border-b border-white/5"></div>
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-center sm:justify-between relative z-10">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center group">
+        <img src="Assets/LOGOTIPO.png" alt="SiteOnLab Logo" class="h-8 md:h-9 w-auto object-contain transition-transform group-hover:scale-105">
+      </a>
+
+      <!-- Lado Direito: Links de Navegação e Botões Agrupados à Direita -->
+      <div class="flex items-center gap-8 md:gap-10">
+        
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8 text-xs font-medium text-white/60 uppercase tracking-widest">
+          <a href="#" class="hover:text-white transition-colors">Início</a>
+          <a href="#como-funciona" class="hover:text-white transition-colors">Como Funciona</a>
+          <a href="#planos" class="hover:text-white transition-colors">Planos e Preços</a>
+        </nav>
+
+        <!-- CTA Nav -->
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="#planos" class="px-5 py-2.5 rounded-full bg-white text-black text-xs font-semibold hover:bg-white/90 hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+            Quero Meu Site
+          </a>
+          <a href="https://painel.siteonlab.com.br/auth" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#2EC97A] to-[#1FA37E] text-black text-xs font-bold hover:brightness-110 hover:scale-105 transition-all shadow-[0_0_20px_rgba(46,201,122,0.35)] flex items-center gap-1.5">
+            <iconify-icon icon="solar:user-circle-bold" class="text-sm"></iconify-icon>
+            Fazer login
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO SECTION — PRIMEIRA DOBRA -->
+    <section class="relative min-h-screen flex items-center pt-16 sm:pt-20 pb-12 sm:pb-16 overflow-hidden" id="hero-section">
+      
+      <!-- Volumetric Ambient & Portal Singularity Background -->
+      <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        
+        <!-- Radial Glow (Ambient Center) -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,201,122,0.09)_0%,transparent_65%)] blur-[90px]"></div>
+
+        <!-- Vertical Energy Waves -->
+        <div class="absolute inset-0 opacity-40">
+          <div class="absolute left-[15%] w-32 h-[150%] bg-gradient-to-t from-transparent via-[#2EC97A]/10 to-transparent blur-[45px] animate-[energy-wave_8s_ease-in-out_infinite]"></div>
+          <div class="absolute left-[48%] w-48 h-[150%] bg-gradient-to-t from-transparent via-[#2EC97A]/5 to-transparent blur-[55px] animate-[energy-wave_12s_ease-in-out_infinite_2s]"></div>
+          <div class="absolute right-[22%] w-28 h-[150%] bg-gradient-to-t from-transparent via-[#2EC97A]/10 to-transparent blur-[35px] animate-[energy-wave_10s_ease-in-out_infinite_4s]"></div>
+        </div>
+
+        <!-- Bioluminescent Floating Particles -->
+        <div class="absolute inset-0">
+          <div class="absolute left-[20%] w-[2px] h-8 bg-gradient-to-t from-transparent to-[#2EC97A] rounded-full blur-[1px] animate-[particle-rise_6s_linear_infinite]"></div>
+          <div class="absolute left-[42%] w-[2px] h-12 bg-gradient-to-t from-transparent to-[#2EC97A] rounded-full blur-[2px] animate-[particle-rise_8s_linear_infinite_1.5s]"></div>
+          <div class="absolute left-[68%] w-[1px] h-6 bg-gradient-to-t from-transparent to-[#2EC97A] rounded-full blur-[1px] animate-[particle-rise_7s_linear_infinite_2.5s]"></div>
+          <div class="absolute left-[88%] w-[2px] h-10 bg-gradient-to-t from-transparent to-[#2EC97A] rounded-full blur-[1px] animate-[particle-rise_9s_linear_infinite_3.5s]"></div>
+          <div class="absolute left-[32%] w-[3px] h-14 bg-gradient-to-t from-transparent to-[#2EC97A] rounded-full blur-[3px] animate-[particle-rise_10s_linear_infinite_0.8s]"></div>
+        </div>
+
+        <!-- Portal Rings / Singularity (No mobile: centralizado horizontalmente e alinhado ao topo, tamanho ampliado) -->
+        <div class="absolute top-6 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:top-1/2 md:right-[12%] md:-translate-y-1/2 w-[520px] h-[520px] sm:w-[580px] sm:h-[580px] md:w-[620px] md:h-[620px] rounded-full border border-[#2EC97A]/20 shadow-[0_0_120px_rgba(46,201,122,0.14),inset_0_0_80px_rgba(46,201,122,0.08)] flex items-center justify-center">
+          <!-- Inner pulsating ring -->
+          <div class="absolute w-[70%] h-[70%] rounded-full border border-[#2EC97A]/30 shadow-[0_0_60px_rgba(46,201,122,0.18)] animate-[ping-slow_5s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+          <div class="absolute w-[50%] h-[50%] rounded-full border border-[#2EC97A]/40 shadow-[0_0_40px_rgba(46,201,122,0.22)] animate-[ping-slow_5s_cubic-bezier(0,0,0.2,1)_infinite_2.5s]"></div>
+
+          <!-- Orbiting dots -->
+          <div class="absolute w-[90%] h-[90%] rounded-full animate-[spin_18s_linear_infinite]">
+            <div class="absolute top-0 left-1/2 w-2 h-2 bg-[#2EC97A] rounded-full shadow-[0_0_12px_#2EC97A] -translate-x-1/2 -translate-y-1/2"></div>
+          </div>
+          <div class="absolute w-[110%] h-[110%] rounded-full border border-[#2EC97A]/5 animate-[spin_28s_linear_infinite_reverse]">
+            <div class="absolute bottom-0 left-1/2 w-1.5 h-1.5 bg-white/70 rounded-full shadow-[0_0_10px_white] -translate-x-1/2 translate-y-1/2"></div>
+            <div class="absolute top-1/2 right-0 w-2 h-2 bg-[#2EC97A]/80 rounded-full shadow-[0_0_12px_#2EC97A] translate-x-1/2 -translate-y-1/2"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Hero Content Container -->
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-8 relative z-10 w-full items-start pt-10">
+        
+        <!-- Left Editorial Column (Tamanho original: 7 colunas, 40px abaixo do header) -->
+        <div class="lg:col-span-7 flex flex-col justify-center relative z-20 items-center lg:items-start text-center lg:text-left">
+          
+          <!-- Eyebrow Pill -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#2EC97A]/30 bg-[#2EC97A]/5 backdrop-blur-md text-[#2EC97A] text-[10px] md:text-[11px] font-medium uppercase tracking-widest mb-7 w-max shadow-[0_0_18px_rgba(46,201,122,0.15)] mx-auto lg:mx-0">
+            <div class="w-1.5 h-1.5 rounded-full bg-[#2EC97A] animate-pulse shadow-[0_0_6px_#2EC97A]"></div>
+            Para prestadores de serviços e empresas
+          </div>
+
+          <!-- Headline (H1 & H2) -->
+          <h1 class="text-[32px] sm:text-[34px] md:text-[40px] lg:text-[49px] font-bold tracking-tight text-white mb-3 leading-[1.12] text-center lg:text-left max-w-full lg:max-w-[80%]">
+            Pare de depender apenas de indicações.
+          </h1>
+          <h2 class="text-[17px] sm:text-[18px] md:text-[19px] lg:text-[22px] font-semibold text-[#2EC97A] mb-6 leading-snug text-center lg:text-left max-w-full lg:max-w-[80%]">
+            Tenha um site profissional que coloca sua empresa no Google e fecha clientes pelo WhatsApp.
+          </h2>
+
+          <!-- Subheadline -->
+          <p class="text-sm sm:text-base text-white/60 mb-8 max-w-xl font-light leading-relaxed text-center lg:text-left mx-auto lg:mx-0">
+            Criamos seu site do zero, com design premium e textos estratégicos que transmitem autoridade imediata, sem você precisar entender de tecnologia e sem gastar milhares de reais com agências.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-center lg:justify-start w-full sm:w-auto">
+            <a href="#planos" class="btn-pill-primary px-8 py-4 text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 text-center">
+              <span class="block sm:hidden">Quero meu site profissional</span>
+              <span class="hidden sm:inline">QUERO MEU SITE PROFISSIONAL NO AR</span>
+              <iconify-icon icon="solar:arrow-right-linear" class="text-base font-bold"></iconify-icon>
+            </a>
+            <a href="#como-funciona" class="btn-pill-secondary px-7 py-4 text-xs uppercase tracking-wider hidden sm:flex items-center justify-center gap-2 text-center">
+              <iconify-icon icon="solar:play-circle-linear" class="text-base text-[#2EC97A]"></iconify-icon>
+              Como Funciona
+            </a>
+          </div>
+
+          <!-- Micro-copy below CTA -->
+          <div class="mt-5 flex items-center justify-center lg:justify-start gap-2 text-sm sm:text-[15px] font-medium text-white/80 text-center lg:text-left">
+            <span class="hidden sm:inline-block w-2 h-2 rounded-full bg-[#2EC97A] shadow-[0_0_8px_#2EC97A] flex-shrink-0"></span>
+            <span class="leading-relaxed">
+              <strong>Sem fidelidade</strong>, <span class="text-[#2EC97A] font-semibold">igual Netflix</span>.<br class="block sm:hidden"> Cancele quando quiser.
+            </span>
+          </div>
+
+          <!-- Mockup Showcase Mobile (Visível apenas no mobile, embaixo do botão e micro-copy, subido 20px adicionais com -mt-2, padding de 40px na direita) -->
+          <div class="block sm:hidden w-full -mx-6 px-2 pr-[40px] -mt-2 relative overflow-visible">
+            <div class="relative w-full max-w-[520px] mx-auto h-[340px] flex items-center justify-center">
+              <!-- Glow de fundo ampliado -->
+              <div class="absolute inset-0 bg-[#2EC97A]/25 blur-3xl rounded-full scale-110 pointer-events-none"></div>
+              <!-- Mockups com crossfade sincronizado com desktop via classes hero-mockup-slide-mob -->
+              <div class="relative w-full h-full flex items-center justify-center filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.95)]">
+                <img id="hero-mockup-mob-0" src="Assets/mockup_growth.png" alt="Mockup Growth - SiteOnLab" class="hero-mockup-slide-mob absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out opacity-100 scale-125" />
+                <img id="hero-mockup-mob-1" src="Assets/mockup_simplifica.png" alt="Mockup Simplifica - SiteOnLab" class="hero-mockup-slide-mob absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none scale-125" />
+                <img id="hero-mockup-mob-2" src="Assets/mockup_beyou.png" alt="Mockup Be You - SiteOnLab" class="hero-mockup-slide-mob absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none scale-125" />
+                <img id="hero-mockup-mob-3" src="Assets/mockup_supera.png" alt="Mockup Supera - SiteOnLab" class="hero-mockup-slide-mob absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none scale-125" />
+              </div>
+            </div>
+
+            <!-- Card: Live Lead Stream / WhatsApp Conversion Mobile (Subido mais 30px (-mt-[90px]) sobre o mockup, z-30) -->
+            <div class="relative -mt-[90px] mx-auto w-[290px] max-w-[92%] glass-panel-green hero-spotlight border border-[#2EC97A]/35 rounded-[1.2rem] shadow-[0_25px_45px_rgba(0,0,0,0.92)] overflow-hidden z-30 text-left">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#2EC97A]/12 to-transparent pointer-events-none"></div>
+              <div class="relative z-10 p-3.5 flex flex-col h-full">
+                
+                <!-- Card Header -->
+                <div class="flex items-center gap-1.5 mb-2 opacity-70">
+                  <div class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]"></div>
+                  <div class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]/40"></div>
+                  <div class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]/20"></div>
+                  <span class="ml-auto text-[8px] text-[#2EC97A] font-mono tracking-widest uppercase">
+                    CONVERSÃO WHATSAPP
+                  </span>
+                </div>
+
+                <!-- Message preview -->
+                <div>
+                  <p class="text-[9px] text-white/70 uppercase tracking-widest font-medium mb-1 flex items-center gap-1.5">
+                    <iconify-icon icon="solar:chat-dots-bold" class="text-[#2EC97A] text-xs"></iconify-icon>
+                    Novo Cliente Conectado
+                  </p>
+                  <div class="text-[12.5px] text-white font-medium tracking-tight leading-snug w-full min-h-[38px]">
+                    <span id="typewriter-mob" class="typewriter-cursor inline-block text-white">
+                      "Olá! Vi seu site no Google e gostaria de um orçamento..."
+                    </span>
+                  </div>
+
+                  <!-- Progress Bar -->
+                  <div class="w-full h-1 bg-[#2EC97A]/15 rounded-full mt-2.5 overflow-hidden relative">
+                    <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-[#2EC97A]/60 to-[#2EC97A] w-[75%] shadow-[0_0_10px_#2EC97A]">
+                      <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-r from-transparent to-white/90"></div>
+                    </div>
+                  </div>
+
+                  <!-- Card Subtext -->
+                  <div class="flex items-center justify-between mt-1.5 text-[9px] font-mono text-white/50">
+                    <span>Taxa de Resposta</span>
+                    <span class="text-[#2EC97A] font-semibold">Instantânea</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Right Column: Client Mockup Showcase & Conversion Card (Movido 80px para a direita) -->
+        <div class="lg:col-span-5 relative w-full hidden sm:flex items-center justify-end z-10" id="hero-parallax">
+          
+          <!-- Central Laptop Showcase & Overlaid Card (Altura exata de 650px, deslocado 80px para a direita) -->
+          <div class="relative h-[650px] w-[830px] max-w-none flex-shrink-0 z-10 flex flex-col items-center lg:-mr-[40px]">
+            <!-- Ambient Glow behind laptop -->
+            <div class="absolute inset-0 bg-[#2EC97A]/24 blur-3xl rounded-full scale-100 -z-10 animate-pulse pointer-events-none"></div>
+            
+            <!-- Mockups Carousel Container (650px de altura exata) -->
+            <div class="relative w-full h-[650px] flex items-center justify-center filter drop-shadow-[0_45px_75px_rgba(0,0,0,0.96)]">
+              <img id="hero-mockup-0" src="Assets/mockup_growth.png" alt="Mockup Growth - SiteOnLab" class="hero-mockup-slide absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out opacity-100" />
+              <img id="hero-mockup-1" src="Assets/mockup_simplifica.png" alt="Mockup Simplifica - SiteOnLab" class="hero-mockup-slide absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none" />
+              <img id="hero-mockup-2" src="Assets/mockup_beyou.png" alt="Mockup Be You - SiteOnLab" class="hero-mockup-slide absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none" />
+              <img id="hero-mockup-3" src="Assets/mockup_supera.png" alt="Mockup Supera - SiteOnLab" class="hero-mockup-slide absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none" />
+            </div>
+
+            <!-- Card: Live Lead Stream / WhatsApp Conversion (Deslocado +90px para a direita) -->
+            <div class="absolute bottom-[calc(0.5rem+135px)] sm:bottom-[calc(0.75rem+135px)] md:bottom-[calc(1rem+135px)] right-[-50px] sm:right-[-65px] lg:right-[-50px] w-[265px] sm:w-[285px] md:w-[305px] max-w-[88%] glass-panel-green hero-spotlight border border-[#2EC97A]/35 rounded-[1.4rem] shadow-[0_25px_50px_rgba(0,0,0,0.88)] overflow-hidden z-30">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#2EC97A]/12 to-transparent pointer-events-none"></div>
+              <div class="relative z-10 p-4 md:p-4.5 flex flex-col h-full">
+                
+                <!-- Card Header -->
+                <div class="flex items-center gap-1.5 mb-2.5 opacity-70">
+                  <div class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]"></div>
+                  <div class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]/40"></div>
+                  <div class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]/20"></div>
+                  <span class="ml-auto text-[8px] text-[#2EC97A] font-mono tracking-widest uppercase">
+                    CONVERSÃO WHATSAPP
+                  </span>
+                </div>
+
+                <!-- Message preview -->
+                <div>
+                  <p class="text-[9px] text-white/70 uppercase tracking-widest font-medium mb-1.5 flex items-center gap-1.5">
+                    <iconify-icon icon="solar:chat-dots-bold" class="text-[#2EC97A] text-xs"></iconify-icon>
+                    Novo Cliente Conectado
+                  </p>
+                  <div class="text-[12.5px] md:text-[13.5px] text-white font-medium tracking-tight leading-snug w-full min-h-[40px]">
+                    <span id="typewriter" class="typewriter-cursor inline-block text-white">
+                      "Olá! Vi seu site no Google e gostaria de um orçamento..."
+                    </span>
+                  </div>
+
+                  <!-- Progress Bar -->
+                  <div class="w-full h-1 bg-[#2EC97A]/15 rounded-full mt-3 overflow-hidden relative">
+                    <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-[#2EC97A]/60 to-[#2EC97A] w-[75%] shadow-[0_0_10px_#2EC97A]">
+                      <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-r from-transparent to-white/90"></div>
+                    </div>
+                  </div>
+
+                  <!-- Card Subtext -->
+                  <div class="flex items-center justify-between mt-2 text-[9px] font-mono text-white/50">
+                    <span>Taxa de Resposta</span>
+                    <span class="text-[#2EC97A] font-semibold">Instantânea</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 2. SEÇÃO 2 — O PROBLEMA (DIAGRAMAÇÃO REFINADA COM LINHA DO TEMPO) -->
+    <section class="relative py-16 sm:py-20 px-6 border-t border-emerald-950/40 bg-[#040807] overflow-hidden" id="o-problema">
+      
+      <!-- Background Wave Image (Opacidade reduzida em 90% -> opacity-10, alinhado à base inferior) -->
+      <div class="absolute bottom-0 left-0 right-0 w-full h-[650px] pointer-events-none z-0 overflow-hidden">
+        <img 
+          src="Assets/bg-wave-green.jpg" 
+          alt="Tech green wave background" 
+          class="w-full h-full object-cover object-bottom opacity-10 mix-blend-screen"
+        >
+        <!-- Fade gradiente superior suave para integrar com o topo escuro da seção -->
+        <div class="absolute inset-0 bg-gradient-to-t from-transparent via-[#040807]/40 to-[#040807]"></div>
+      </div>
+
+      <!-- Ambient Radial Subtle Glow -->
+      <div class="absolute top-1/3 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(circle,rgba(46,201,122,0.07)_0%,transparent_70%)] blur-[100px] pointer-events-none z-0"></div>
+
+      <div class="max-w-6xl mx-auto relative z-10">
+        
+        <!-- Top Centralized Content -->
+        <div class="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center">
+          
+          <!-- Eyebrow Pill -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#2EC97A]/30 bg-[#2EC97A]/5 backdrop-blur-md text-[#2EC97A] text-[10px] md:text-[11px] font-mono font-medium uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(46,201,122,0.12)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A] animate-pulse shadow-[0_0_6px_#2EC97A]"></span>
+            O QUE ESTÁ ACONTECENDO
+          </div>
+
+          <!-- Main Title -->
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight text-white mb-6 leading-[1.12]">
+            Quando alguém pesquisa pelo seu serviço na internet, <span class="text-[#2EC97A]">encontra a sua empresa ou o seu concorrente?</span>
+          </h2>
+
+          <!-- Context Paragraph -->
+          <p class="text-sm sm:text-base text-white/70 leading-relaxed font-light max-w-2xl">
+            Você pode ter o melhor atendimento da sua região e anos de experiência no mercado. Mas o que acontece quando alguém ouve falar de você e <strong class="text-white font-medium">decide pesquisar no Google ou no Instagram antes de mandar uma mensagem?</strong>
+          </p>
+
+          <!-- Label Discreto com Tipografia Fluida e Elegante -->
+          <div class="mt-8 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/5 text-xs sm:text-sm text-white/60 font-sans leading-relaxed">
+            Se essa pessoa não encontrar um site profissional, com informações claras e visual de confiança:
+          </div>
+
+        </div>
+
+        <!-- Lower Block: 3 Cards on Left + Circuit Connectors + iPhone Mockup on Right -->
+        <div class="relative max-w-5xl mx-auto mt-10" id="tech-interactive-block">
+          
+          <div class="grid lg:grid-cols-12 gap-4 lg:gap-6 items-center relative z-10">
+            
+            <!-- LEFT COLUMN: 3 Consequence Cards (No mobile: sobe metade da imagem com -mt-56 e z-30 sobre o mockup; paddings refinados) -->
+            <div class="lg:col-span-6 flex flex-col gap-2.5 order-2 lg:order-1 max-w-full lg:max-w-[84%] lg:ml-auto relative cards-container -mt-56 sm:mt-0 z-30">
+              
+              <!-- Card 1: Ela hesita e desconfia -->
+              <div class="card-opening py-5 px-3.5 sm:p-5 rounded-2xl bg-[#0D1A14]/95 border border-emerald-950/70 hover:border-red-500/40 transition-all duration-300 shadow-[0_15px_30px_rgba(0,0,0,0.85)] backdrop-blur-md relative" data-step="1">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold bg-red-500/15 text-red-400 border border-red-500/30">
+                    01 · REAÇÃO IMEDIATA
+                  </span>
+                  <span class="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#EF4444]"></span>
+                </div>
+                <div class="flex items-start gap-3.5">
+                  <div class="w-9 h-9 rounded-xl bg-red-500/10 border border-red-500/25 flex items-center justify-center text-red-400 flex-shrink-0 mt-0.5 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                    <iconify-icon icon="solar:shield-warning-linear" class="text-lg"></iconify-icon>
+                  </div>
+                  <div>
+                    <h3 class="text-sm sm:text-base font-bold text-white leading-snug">
+                      Ela <span class="text-red-400">hesita e desconfia</span> da sua estrutura
+                    </h3>
+                    <p class="text-xs text-white/60 leading-relaxed mt-1 font-light">
+                      A ausência de um endereço oficial gera dúvida imediata sobre a seriedade e o tamanho do seu negócio.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Tech Branch Line 1 Estendida em 100% (Card 1 -> Celular: 160px) -->
+                <div class="hidden lg:block absolute -right-40 top-1/2 -translate-y-1/2 w-40 h-10 pointer-events-none z-20">
+                  <svg class="w-full h-full overflow-visible" viewBox="0 0 160 40">
+                    <path class="tech-branch-line" d="M 0 20 L 70 20 L 110 30 L 155 30" fill="none" stroke="#EF4444" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.85"/>
+                    <circle cx="155" cy="30" r="4.5" fill="#EF4444" stroke="#040807" stroke-width="2"/>
+                    <circle cx="155" cy="30" r="9" fill="none" stroke="#EF4444" stroke-width="1" opacity="0.5"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Card 2: Procura outra opção -->
+              <div class="card-opening py-5 px-3.5 sm:p-5 rounded-2xl bg-[#0D1A14]/95 border border-emerald-950/70 hover:border-amber-500/40 transition-all duration-300 shadow-[0_15px_30px_rgba(0,0,0,0.85)] backdrop-blur-md relative" data-step="2">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30">
+                    02 · COMPARATIVO
+                  </span>
+                  <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#F59E0B]"></span>
+                </div>
+                <div class="flex items-start gap-3.5">
+                  <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400 flex-shrink-0 mt-0.5 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                    <iconify-icon icon="solar:magnifer-linear" class="text-lg"></iconify-icon>
+                  </div>
+                  <div>
+                    <h3 class="text-sm sm:text-base font-bold text-white leading-snug">
+                      Procura <span class="text-amber-400">outra opção no Google</span>
+                    </h3>
+                    <p class="text-xs text-white/60 leading-relaxed mt-1 font-light">
+                      Volta à pesquisa para encontrar quem apresente soluções organizadas, fotos reais e preço transparente.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Tech Branch Line 2 Estendida em 100% (Card 2 -> Celular: 160px) -->
+                <div class="hidden lg:block absolute -right-40 top-1/2 -translate-y-1/2 w-40 h-10 pointer-events-none z-20">
+                  <svg class="w-full h-full overflow-visible" viewBox="0 0 160 40">
+                    <path class="tech-branch-line" d="M 0 20 L 90 20 L 155 20" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.85"/>
+                    <circle cx="155" cy="20" r="4.5" fill="#F59E0B" stroke="#040807" stroke-width="2"/>
+                    <circle cx="155" cy="20" r="9" fill="none" stroke="#F59E0B" stroke-width="1" opacity="0.5"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Card 3: Fecha com o concorrente -->
+              <div class="card-opening py-5 px-3.5 sm:p-5 rounded-2xl bg-[#0D1A14]/95 border border-[#2EC97A]/30 hover:border-[#2EC97A]/60 transition-all duration-300 shadow-[0_15px_30px_rgba(0,0,0,0.85)] backdrop-blur-md relative" data-step="3">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold bg-[#2EC97A]/15 text-[#2EC97A] border border-[#2EC97A]/30">
+                    03 · PERDA DA VENDA
+                  </span>
+                  <span class="w-2 h-2 rounded-full bg-[#2EC97A] shadow-[0_0_8px_#2EC97A]"></span>
+                </div>
+                <div class="flex items-start gap-3.5">
+                  <div class="w-9 h-9 rounded-xl bg-[#2EC97A]/10 border border-[#2EC97A]/25 flex items-center justify-center text-[#2EC97A] flex-shrink-0 mt-0.5 shadow-[0_0_18px_rgba(46,201,122,0.25)]">
+                    <iconify-icon icon="solar:user-cross-linear" class="text-lg"></iconify-icon>
+                  </div>
+                  <div>
+                    <h3 class="text-sm sm:text-base font-bold text-white leading-snug">
+                      Fecha negócio direto com o <span class="text-[#2EC97A]">seu concorrente</span>
+                    </h3>
+                    <p class="text-xs text-white/60 leading-relaxed mt-1 font-light">
+                      O cliente que estava pronto para comprar vai direto para a agenda do concorrente que tem um site no ar.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Tech Branch Line 3 Estendida em 100% (Card 3 -> Celular: 160px) -->
+                <div class="hidden lg:block absolute -right-40 top-1/2 -translate-y-1/2 w-40 h-10 pointer-events-none z-20">
+                  <svg class="w-full h-full overflow-visible" viewBox="0 0 160 40">
+                    <path class="tech-branch-line" d="M 0 20 L 70 20 L 110 10 L 155 10" fill="none" stroke="#2EC97A" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.95"/>
+                    <circle cx="155" cy="10" r="4.5" fill="#2EC97A" stroke="#040807" stroke-width="2"/>
+                    <circle cx="155" cy="10" r="9" fill="none" stroke="#2EC97A" stroke-width="1" opacity="0.5"/>
+                  </svg>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: iPhone Mockup (Movido 30% para a esquerda) -->
+            <div class="lg:col-span-6 flex justify-center lg:justify-start items-center relative order-1 lg:order-2 h-full lg:-ml-12">
+              
+              <!-- Ambient Glow behind Mockup -->
+              <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(46,201,122,0.2)_0%,transparent_65%)] blur-[95px] pointer-events-none"></div>
+
+              <!-- Floating Mockup Container with Height Matching Cards -->
+              <div class="relative group anim-float flex items-center justify-center py-2">
+                
+                <!-- Real iPhone Mockup Image with Full Height Scale -->
+                <img 
+                  src="Assets/mockup-busca-google.png" 
+                  alt="Pesquisa no Google mostrando concorrentes" 
+                  class="w-auto h-[480px] sm:h-[540px] md:h-[580px] lg:h-[610px] max-w-full object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.9)] drop-shadow-[0_0_40px_rgba(46,201,122,0.28)] transition-transform duration-500 group-hover:scale-[1.02]"
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CONTINUAÇÃO DA DOBRA: A VERDADE NUA E CRUA (SEM DIVISÓRIA, SEM BADGE, +30% TAMANHO, TEXTO VERDE) -->
+        <div class="truth-reveal mt-14 max-w-4xl mx-auto text-center relative z-10">
+          
+          <!-- Subtle Glow behind Truth Quote -->
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[300px] bg-[radial-gradient(circle,rgba(46,201,122,0.1)_0%,transparent_70%)] blur-[90px] pointer-events-none"></div>
+
+          <!-- Título com +30% no tamanho em relação ao H1, na cor verde, sem aspas -->
+          <h3 class="text-[35px] sm:text-[44px] md:text-[54px] lg:text-[64px] font-bold tracking-tight text-[#2EC97A] mb-5 leading-[1.08]">
+            A verdade<br class="block sm:hidden"> nua e crua:
+          </h3>
+
+          <!-- Parágrafo Centralizado com trecho destacado em verde -->
+          <p class="text-base sm:text-lg md:text-xl lg:text-[22px] text-white/80 leading-relaxed font-light max-w-3xl mx-auto">
+            Toda semana você perde clientes qualificados simplesmente porque a sua empresa está <span class="text-[#2EC97A] font-semibold">invisível para quem já está pronto para comprar.</span>
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 3. SEÇÃO 3 — O COMPORTAMENTO DO CONSUMIDOR MODERNO (DESIGN SYSTEM SITEONLAB) -->
+    <section class="relative py-16 sm:py-20 px-6 border-t border-emerald-950/40 bg-[#040807] overflow-hidden" id="comportamento-moderno">
+      
+      <!-- Ambient Bioluminescent Glows -->
+      <div class="absolute top-1/4 -left-32 w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(46,201,122,0.06)_0%,transparent_70%)] blur-[110px] pointer-events-none z-0"></div>
+      <div class="absolute bottom-10 right-0 w-[600px] h-[450px] bg-[radial-gradient(circle,rgba(46,201,122,0.08)_0%,transparent_70%)] blur-[120px] pointer-events-none z-0"></div>
+
+      <div class="max-w-6xl mx-auto relative z-10">
+        
+        <!-- Grid Split 2 Blocos de 50% cada, com espaçamento de 40px (gap-10) -->
+        <div class="grid lg:grid-cols-2 gap-10 items-start">
+          
+          <!-- Bloco 1 (50%): Lateral esquerda -->
+          <div class="flex flex-col space-y-8 lg:sticky lg:top-28 items-center lg:items-start text-center lg:text-left">
+            
+            <!-- Titulo: O seu cliente moderno não compra no escuro: ele pesquisa antes de fechar. (order-2 e pt-[60px] no mobile, order-1 no desktop) -->
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight text-white leading-[1.15] text-center lg:text-left order-2 lg:order-1 pt-[60px] lg:pt-0">
+              O seu cliente moderno não compra no escuro: <span class="text-[#2EC97A]">ele pesquisa antes de fechar.</span>
+            </h2>
+
+            <!-- Pesquisa: No Brasil, mais de 66% dos consumidores pesquisam no Google antes de contratar qualquer serviço. (Card Branco, order-1 no mobile, order-2 no desktop) -->
+            <div class="relative w-full lg:w-[75%] p-5 sm:p-6 rounded-2xl bg-white text-[#040807] border border-white/20 shadow-[0_20px_45px_-10px_rgba(255,255,255,0.15),0_10px_25px_rgba(0,0,0,0.9)] transition-all mx-auto lg:mx-0 text-left order-1 lg:order-2">
+              
+              <div class="flex items-center justify-between mb-3">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#040807]/5 text-[#040807] border border-[#040807]/10 flex items-center gap-1.5">
+                  <iconify-icon icon="logos:google-icon" class="text-xs"></iconify-icon>
+                  PESQUISA
+                </span>
+                <span class="w-2 h-2 rounded-full bg-[#1FA360] shadow-[0_0_8px_#1FA360]"></span>
+              </div>
+
+              <!-- Destaque Numérico Visual de +66% -->
+              <div class="flex items-baseline gap-2 mb-2">
+                <span class="text-4xl sm:text-5xl font-black font-mono tracking-tight text-[#040807]">
+                  +66%
+                </span>
+              </div>
+
+              <p class="text-xs sm:text-sm text-[#040807]/90 font-medium leading-relaxed">
+                No Brasil, <strong class="text-[#040807] font-extrabold underline decoration-[#1FA360] decoration-2 underline-offset-4">mais de 66% dos consumidores pesquisam no Google antes de contratar qualquer serviço.</strong>
+              </p>
+
+              <!-- Barra Visual de Progresso -->
+              <div class="w-full bg-[#040807]/10 h-1.5 rounded-full overflow-hidden mt-4">
+                <div class="h-full bg-gradient-to-r from-[#1FA360] to-[#2EC97A] rounded-full" style="width: 66%;"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bloco 2 (50%): Lateral direita -->
+          <div class="flex flex-col space-y-5">
+            
+            <!-- Texto inicial -->
+            <div class="space-y-1 text-center lg:text-left">
+              <p class="text-base sm:text-lg text-white font-medium leading-relaxed">
+                Coloque-se no lugar de quem precisa<br class="block sm:hidden"> do que você vende hoje.
+              </p>
+              <p class="text-sm sm:text-base text-white/70 leading-relaxed">
+                Essa pessoa quer respostas imediatas:
+              </p>
+            </div>
+
+            <!-- As 3 perguntas em cards (-20% de tamanho com padding compacto e ícones dedicados) -->
+            <div class="space-y-2.5">
+              
+              <div class="px-3.5 py-3 rounded-xl bg-[#0D1A14] border border-emerald-950/80 hover:border-[#2EC97A]/40 transition-colors flex items-center gap-3">
+                <div class="w-7 h-7 rounded-lg bg-[#2EC97A]/10 border border-[#2EC97A]/25 flex items-center justify-center text-[#2EC97A] flex-shrink-0">
+                  <iconify-icon icon="solar:question-circle-linear" class="text-base"></iconify-icon>
+                </div>
+                <p class="text-xs sm:text-[13px] text-white/90 font-medium leading-snug">
+                  O que exatamente você faz e como resolve o problema dela?
+                </p>
+              </div>
+
+              <div class="px-3.5 py-3 rounded-xl bg-[#0D1A14] border border-emerald-950/80 hover:border-[#2EC97A]/40 transition-colors flex items-center gap-3">
+                <div class="w-7 h-7 rounded-lg bg-[#2EC97A]/10 border border-[#2EC97A]/25 flex items-center justify-center text-[#2EC97A] flex-shrink-0">
+                  <iconify-icon icon="solar:verified-check-linear" class="text-base"></iconify-icon>
+                </div>
+                <p class="text-xs sm:text-[13px] text-white/90 font-medium leading-snug">
+                  Qual é o seu diferencial e por que ela deveria confiar em você?
+                </p>
+              </div>
+
+              <div class="px-3.5 py-3 rounded-xl bg-[#0D1A14] border border-emerald-950/80 hover:border-[#2EC97A]/40 transition-colors flex items-center gap-3">
+                <div class="w-7 h-7 rounded-lg bg-[#2EC97A]/10 border border-[#2EC97A]/25 flex items-center justify-center text-[#2EC97A] flex-shrink-0">
+                  <iconify-icon icon="solar:chat-round-call-linear" class="text-base"></iconify-icon>
+                </div>
+                <p class="text-xs sm:text-[13px] text-white/90 font-medium leading-snug">
+                  Onde sua empresa está e como falar com você sem burocracia?
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Textos finais centralizados no mobile e com fonte aumentada -->
+            <div class="pt-3 space-y-3 text-center lg:text-left">
+              <p class="text-sm sm:text-base text-white/80 leading-relaxed font-light">
+                Quando essas respostas estão organizadas em uma página estratégica, rápida e bonita, a decisão de compra fica óbvia.
+              </p>
+
+              <p class="text-sm sm:text-base text-white/80 leading-relaxed font-light">
+                Você para de correr atrás de clientes e passa a receber mensagens de quem já entendeu o valor do seu trabalho.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 4. SEÇÃO 4 — A SOLUÇÃO (BACKGROUND VERDE #2ABF7B & SCROLL STICKY) -->
+    <section class="relative py-16 sm:py-20 px-6 bg-[#2ABF7B] border-t border-[#2ABF7B]" id="solucao">
+      
+      <!-- Background Quadriculado BEM Sutil com Linhas Brancas (Máx 5% de opacidade) -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto relative z-10">
+        
+        <!-- Grid: Lado Esquerdo Fixo (Sticky) e Lado Direito Rolando Normalmente -->
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          <!-- LADO ESQUERDO: Altura Fixa via .container-fixo durante o scroll da seção com padding superior de 90px no desktop -->
+          <div class="lg:col-span-5 container-fixo lg:pt-[90px] space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
+            
+            <!-- Titulo: Aumentado no mobile para text-[30px] com "o site da sua empresa" em branco -->
+            <h2 class="text-[30px] sm:text-3xl md:text-4xl lg:text-[40px] font-bold tracking-tight text-[#040807] leading-[1.12] text-center lg:text-left">
+              Nós criamos e colocamos <span class="text-white drop-shadow-sm">o site da sua empresa</span> no ar em poucos dias.
+            </h2>
+
+            <!-- Subtitulo -->
+            <p class="text-base sm:text-lg text-[#040807]/80 leading-relaxed font-normal text-center lg:text-left">
+              Do design à redação dos textos: cuidamos de absolutamente tudo para você construir uma presença digital imbatível, sem dor de cabeça e sem complicação técnica.
+            </p>
+
+            <!-- Detalhe Visual Tech -->
+            <div class="pt-2 flex items-center justify-center lg:justify-start gap-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]"></span>
+              <div class="h-0.5 w-24 bg-gradient-to-r from-white to-transparent"></div>
+            </div>
+
+          </div>
+
+          <!-- LADO DIREITO: 3 Cards Subindo com o Scroll (Centralizados, Padding de 35px e Largura -25%) -->
+          <div class="lg:col-span-7 flex flex-col items-center space-y-6">
+            
+            <!-- Card 1: Coloca você no radar do Google -->
+            <div class="w-full lg:w-[75%] p-[35px] rounded-2xl bg-white border border-black/5 shadow-[0_20px_45px_-15px_rgba(0,0,0,0.18)] hover:shadow-[0_25px_50px_-10px_rgba(0,0,0,0.25)] transition-all duration-300 group">
+              <!-- Ícone superior alinhado à esquerda junto com o texto -->
+              <div class="w-12 h-12 rounded-xl bg-[#2ABF7B]/15 border border-[#2ABF7B]/30 flex items-center justify-center text-[#1FA360] mb-4 group-hover:scale-105 group-hover:bg-[#2ABF7B]/25 transition-all">
+                <iconify-icon icon="solar:radar-2-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <div class="space-y-2">
+                <h3 class="text-lg sm:text-xl font-bold text-[#040807] tracking-tight leading-snug">
+                  Coloca você no radar do Google
+                </h3>
+                <p class="text-sm sm:text-base text-[#040807]/75 leading-relaxed font-normal">
+                  Tenha o seu endereço oficial na internet. Seja encontrado exatamente no momento em que potenciais clientes estão buscando pelos seus serviços.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 2: Transmite autoridade e confiança imediata -->
+            <div class="w-full lg:w-[75%] p-[35px] rounded-2xl bg-white border border-black/5 shadow-[0_20px_45px_-15px_rgba(0,0,0,0.18)] hover:shadow-[0_25px_50px_-10px_rgba(0,0,0,0.25)] transition-all duration-300 group">
+              <!-- Ícone superior alinhado à esquerda junto com o texto -->
+              <div class="w-12 h-12 rounded-xl bg-[#2ABF7B]/15 border border-[#2ABF7B]/30 flex items-center justify-center text-[#1FA360] mb-4 group-hover:scale-105 group-hover:bg-[#2ABF7B]/25 transition-all">
+                <iconify-icon icon="solar:shield-check-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <div class="space-y-2">
+                <h3 class="text-lg sm:text-xl font-bold text-[#040807] tracking-tight leading-snug">
+                  Transmite autoridade e confiança imediata
+                </h3>
+                <p class="text-sm sm:text-base text-[#040807]/75 leading-relaxed font-normal">
+                  Substitua a impressão amadora de um perfil solto nas redes por uma página institucional moderna. O cliente percebe o profissionalismo da sua empresa logo no primeiro segundo.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 3: Transforma visitantes casuais em conversas no WhatsApp -->
+            <div class="w-full lg:w-[75%] p-[35px] rounded-2xl bg-white border border-black/5 shadow-[0_20px_45px_-15px_rgba(0,0,0,0.18)] hover:shadow-[0_25px_50px_-10px_rgba(0,0,0,0.25)] transition-all duration-300 group">
+              <!-- Ícone superior alinhado à esquerda junto com o texto -->
+              <div class="w-12 h-12 rounded-xl bg-[#2ABF7B]/15 border border-[#2ABF7B]/30 flex items-center justify-center text-[#1FA360] mb-4 group-hover:scale-105 group-hover:bg-[#2ABF7B]/25 transition-all">
+                <iconify-icon icon="solar:chat-round-dots-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <div class="space-y-2">
+                <h3 class="text-lg sm:text-xl font-bold text-[#040807] tracking-tight leading-snug">
+                  Transforma visitantes casuais em conversas no WhatsApp
+                </h3>
+                <p class="text-sm sm:text-base text-[#040807]/75 leading-relaxed font-normal">
+                  Nada de formulários longos que ninguém preenche. Seu site é projetado com pontos estratégicos de conversão para direcionar o cliente direto para o seu WhatsApp comercial.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 5. SEÇÃO 5 — PROJETOS / AUTORIDADE (BACKGROUND BRANCO & CARROSSEL) -->
+    <section class="relative py-16 sm:py-20 px-6 bg-white overflow-hidden text-[#040807]" id="cases">
+      
+      <div class="max-w-7xl mx-auto relative z-10">
+        
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+          
+          <!-- COLUNA ESQUERDA: Copy, Badge, Botão CTA e Social Proof -->
+          <div class="lg:col-span-5 space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
+            
+            <!-- Badge / Eyebrow Pill -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#2EC97A]/40 bg-[#2EC97A]/10 text-[#1FA360] text-xs font-semibold tracking-wide">
+              <iconify-icon icon="solar:chat-round-line-linear" class="text-sm"></iconify-icon>
+              <span>Autoridade Digital</span>
+            </div>
+
+            <!-- Título com SiteOnLab em verde e altura de linha ampliada -->
+            <h2 class="text-3xl sm:text-4xl md:text-[42px] lg:text-[44px] font-extrabold tracking-tight text-[#040807] leading-[1.25] text-center lg:text-left">
+              A <span class="text-[#1FA360]">SiteOnLab</span> foi feita para negócios que não aceitam ficar para trás.
+            </h2>
+
+            <!-- Subtítulo -->
+            <p class="text-base sm:text-lg text-[#040807]/75 font-normal leading-relaxed text-center lg:text-left">
+              Não importa se você é da área da saúde, advocacia, consultoria, estética ou prestação de serviços: quem é visto com autoridade, cobra mais caro e vende mais.
+            </p>
+
+            <!-- Botão CTA (Desktop: na coluna esquerda) -->
+            <div class="pt-2 w-full sm:w-auto hidden lg:flex justify-start">
+              <a href="#planos" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#2EC97A] hover:bg-[#25b56b] text-[#040807] font-bold text-sm sm:text-base tracking-wide shadow-[0_10px_25px_rgba(46,201,122,0.35)] hover:shadow-[0_15px_30px_rgba(46,201,122,0.5)] transition-all duration-300 transform hover:-translate-y-0.5">
+                Quero ser autoridade também
+              </a>
+            </div>
+
+          </div>
+
+          <!-- COLUNA DIREITA: Carrossel com Cards de Projetos e Controles -->
+            <!-- Controles do Carrossel (No mobile: exibido ACIMA do carrossel; No desktop: abaixo dos cards) -->
+            <div class="flex lg:hidden items-center justify-between gap-3 pb-1 -mt-1">
+              <span class="text-xs font-mono font-medium text-[#040807]/50 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]"></span>
+                Arraste para o lado
+              </span>
+              <div class="flex items-center gap-2.5">
+                <button aria-label="Anterior" onclick="document.getElementById('cases-carousel').scrollBy({ left: -320, behavior: 'smooth' });" class="w-10 h-10 rounded-full border border-black/15 bg-white text-[#040807] hover:border-[#2EC97A] hover:text-[#1FA360] flex items-center justify-center transition-all duration-200 shadow-sm active:scale-95">
+                  <iconify-icon icon="solar:alt-arrow-left-linear" class="text-base"></iconify-icon>
+                </button>
+                <button aria-label="Próximo" onclick="document.getElementById('cases-carousel').scrollBy({ left: 320, behavior: 'smooth' });" class="w-10 h-10 rounded-full bg-[#2EC97A] hover:bg-[#25b56b] text-[#040807] flex items-center justify-center transition-all duration-200 shadow-[0_6px_15px_rgba(46,201,122,0.35)] active:scale-95">
+                  <iconify-icon icon="solar:alt-arrow-right-linear" class="text-base"></iconify-icon>
+                </button>
+              </div>
+            </div>
+
+            <!-- Container do Carrossel com Scroll Snap Suave -->
+            <div id="cases-carousel" class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-2 no-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+              
+              <!-- Slide 01 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide01.png" alt="Case SiteOnLab 01" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 02 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide02.png" alt="Case SiteOnLab 02" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 03 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide03.png" alt="Case SiteOnLab 03" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 04 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide04.png" alt="Case SiteOnLab 04" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 05 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide05.png" alt="Case SiteOnLab 05" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 06 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide06.png" alt="Case SiteOnLab 06" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 07 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide07.png" alt="Case SiteOnLab 07" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 08 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide08.png" alt="Case SiteOnLab 08" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 09 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide09.png" alt="Case SiteOnLab 09" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 10 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide10.png" alt="Case SiteOnLab 10" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 11 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide11.png" alt="Case SiteOnLab 11" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 12 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide12.png" alt="Case SiteOnLab 12" class="w-full h-full object-cover">
+              </div>
+
+              <!-- Slide 13 -->
+              <div class="snap-start flex-shrink-0 w-[270px] sm:w-[320px] md:w-[350px] aspect-[472/522] rounded-3xl bg-[#EAEAEA] relative overflow-hidden group shadow-[0_12px_32px_rgba(0,0,0,0.08)] border border-black/5 hover:scale-[1.02] transition-transform duration-300">
+                <img src="Assets/slide13.png" alt="Case SiteOnLab 13" class="w-full h-full object-cover">
+              </div>
+
+            </div>
+
+            <!-- Controles do Carrossel (Desktop: setas abaixo dos cards) -->
+            <div class="hidden lg:flex items-center justify-between sm:justify-start gap-3 pt-2">
+              <div class="flex items-center gap-3">
+                <button id="cases-prev" aria-label="Anterior" class="w-11 h-11 rounded-full border border-black/15 bg-white text-[#040807] hover:border-[#2EC97A] hover:text-[#1FA360] flex items-center justify-center transition-all duration-200 shadow-sm active:scale-95">
+                  <iconify-icon icon="solar:alt-arrow-left-linear" class="text-lg"></iconify-icon>
+                </button>
+                <button id="cases-next" aria-label="Próximo" class="w-11 h-11 rounded-full bg-[#2EC97A] hover:bg-[#25b56b] text-[#040807] flex items-center justify-center transition-all duration-200 shadow-[0_6px_15px_rgba(46,201,122,0.35)] active:scale-95">
+                  <iconify-icon icon="solar:alt-arrow-right-linear" class="text-lg"></iconify-icon>
+                </button>
+              </div>
+            </div>
+
+            <!-- Botão CTA Mobile (Exibido abaixo do carrossel no mobile) -->
+            <div class="pt-4 w-full flex lg:hidden justify-center">
+              <a href="#planos" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#2EC97A] hover:bg-[#25b56b] text-[#040807] font-bold text-sm sm:text-base tracking-wide shadow-[0_10px_25px_rgba(46,201,122,0.35)] hover:shadow-[0_15px_30px_rgba(46,201,122,0.5)] transition-all duration-300 text-center">
+                Quero ser autoridade também
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 6. SEÇÃO 6 — COMO FUNCIONA (DIAGRAMAÇÃO HIGH-END INSPIRADA NA REFERÊNCIA) -->
+    <section class="relative py-16 sm:py-24 px-6 bg-[#040807] border-t border-emerald-950/40 text-white overflow-hidden" id="como-funciona">
+      
+      <!-- Luzes Bioluminescentes Sutis -->
+      <div class="absolute top-0 left-1/3 w-[600px] h-[350px] bg-[radial-gradient(ellipse,rgba(46,201,122,0.08)_0%,transparent_70%)] blur-[100px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto relative z-10">
+        
+        <!-- HEADER DA SEÇÃO: Split assimétrico com Headline forte à esquerda e Descrição + CTA à direita (como na referência) -->
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-16 sm:mb-20 text-center lg:text-left">
+          
+          <!-- Lado Esquerdo: Eyebrow + Titulo Gigante Moderno -->
+          <div class="lg:col-span-7 space-y-4 flex flex-col items-center lg:items-start">
+            <span class="text-xs font-mono font-bold tracking-[0.25em] text-[#2EC97A] uppercase flex items-center justify-center lg:justify-start gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#2EC97A] shadow-[0_0_8px_#2EC97A]"></span>
+              COMO FUNCIONA
+            </span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-extrabold tracking-tight text-white uppercase leading-[1.08] font-sans text-center lg:text-left">
+              <span class="block sm:hidden">
+                SEU SITE PRONTO<br>PARA VENDER EM<br><span class="text-[#2EC97A]">3 PASSOS SIMPLES.</span>
+              </span>
+              <span class="hidden sm:inline">
+                Seu site pronto para vender em apenas<br><span class="text-[#2EC97A]">3 passos simples.</span>
+              </span>
+            </h2>
+          </div>
+
+          <!-- Lado Direito: Subtítulo + Botão de Ação (Desktop) -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-6 lg:pl-6 items-center lg:items-start text-center lg:text-left">
+            <p class="text-base sm:text-lg text-white/70 font-light leading-relaxed text-center lg:text-left">
+              Você não precisa entender de código, design ou servidores. Nossa equipe faz todo o trabalho pesado.
+            </p>
+            <div class="w-full sm:w-auto hidden lg:flex justify-start">
+              <a href="#planos" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#2EC97A] hover:bg-[#25b56b] text-[#040807] font-bold text-xs sm:text-sm uppercase tracking-wider shadow-[0_10px_25px_rgba(46,201,122,0.3)] hover:shadow-[0_15px_30px_rgba(46,201,122,0.45)] transition-all duration-300 transform hover:-translate-y-0.5">
+                QUERO MEU SITE EM 3 PASSOS
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- GRID DE 3 CARDS VERTICAIS (Com espaço para imagem no topo como na referência) -->
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+          
+          <!-- CARD 01: Cadastro em 2 minutos -->
+          <div class="rounded-2xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Glow no topo do card ao passar o mouse -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#2EC97A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+
+            <!-- IMAGEM DO PASSO 01 -->
+            <div class="relative w-full h-[220px] sm:h-[240px] bg-[#050C09] border-b border-white/5 overflow-hidden flex items-center justify-center">
+              <img src="Assets/01-cadastro.png" alt="Passo 01 - Cadastro em 2 minutos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <!-- Conteúdo do Card -->
+            <div class="p-7 sm:p-8 flex flex-col justify-between flex-1 space-y-6">
+              <div class="space-y-4">
+                <!-- Tag / Número Estilo Porsche -->
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider uppercase bg-white/5 border border-white/10 text-white/60">
+                    PASSO 01
+                  </span>
+                  <span class="text-2xl font-mono font-black text-white/15 group-hover:text-[#2EC97A]/40 transition-colors">
+                    01
+                  </span>
+                </div>
+
+                <!-- Título do Passo -->
+                <h3 class="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight leading-snug">
+                  01. Cadastro em 2 minutos
+                </h3>
+
+                <!-- Descrição -->
+                <p class="text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                  Escolha o plano ideal para a fase do seu negócio, crie sua conta e dê o primeiro passo para profissionalizar sua marca.
+                </p>
+              </div>
+
+              <!-- Ícone Semântico Discreto na Base -->
+              <div class="pt-5 border-t border-white/5 flex items-center justify-between text-[#2EC97A]">
+                <span class="text-xs font-mono uppercase tracking-wider text-white/40">Início Imediato</span>
+                <iconify-icon icon="solar:user-plus-linear" class="text-2xl group-hover:scale-110 transition-transform"></iconify-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 02: Briefing Lab Guiado -->
+          <div class="rounded-2xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Glow no topo do card ao passar o mouse -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#2EC97A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+
+            <!-- IMAGEM DO PASSO 02 -->
+            <div class="relative w-full h-[220px] sm:h-[240px] bg-[#050C09] border-b border-white/5 overflow-hidden flex items-center justify-center">
+              <img src="Assets/02-briefing.png" alt="Passo 02 - Briefing Lab Guiado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <!-- Conteúdo do Card -->
+            <div class="p-7 sm:p-8 flex flex-col justify-between flex-1 space-y-6">
+              <div class="space-y-4">
+                <!-- Tag / Número Estilo Porsche -->
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider uppercase bg-white/5 border border-white/10 text-white/60">
+                    PASSO 02
+                  </span>
+                  <span class="text-2xl font-mono font-black text-white/15 group-hover:text-[#2EC97A]/40 transition-colors">
+                    02
+                  </span>
+                </div>
+
+                <!-- Título do Passo -->
+                <h3 class="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight leading-snug">
+                  02. Briefing Lab Guiado
+                </h3>
+
+                <!-- Descrição -->
+                <p class="text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                  Responda algumas perguntas diretas sobre seus serviços, público e diferenciais. Nós cuidamos de toda a estratégia e escrevemos os textos vendedores para você.
+                </p>
+              </div>
+
+              <!-- Ícone Semântico Discreto na Base -->
+              <div class="pt-5 border-t border-white/5 flex items-center justify-between text-[#2EC97A]">
+                <span class="text-xs font-mono uppercase tracking-wider text-white/40">Estratégia Completa</span>
+                <iconify-icon icon="solar:document-add-linear" class="text-2xl group-hover:scale-110 transition-transform"></iconify-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 03: Desenvolvimento, Aprovação e Publicação -->
+          <div class="rounded-2xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Glow no topo do card ao passar o mouse -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#2EC97A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+
+            <!-- IMAGEM DO PASSO 03 -->
+            <div class="relative w-full h-[220px] sm:h-[240px] bg-[#050C09] border-b border-white/5 overflow-hidden flex items-center justify-center">
+              <img src="Assets/03-publicacao.png" alt="Passo 03 - Desenvolvimento, Aprovação e Publicação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <!-- Conteúdo do Card -->
+            <div class="p-7 sm:p-8 flex flex-col justify-between flex-1 space-y-6">
+              <div class="space-y-4">
+                <!-- Tag / Número Estilo Porsche -->
+                <div class="flex items-center justify-between">
+                  <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider uppercase bg-white/5 border border-white/10 text-white/60">
+                    PASSO 03
+                  </span>
+                  <span class="text-2xl font-mono font-black text-white/15 group-hover:text-[#2EC97A]/40 transition-colors">
+                    03
+                  </span>
+                </div>
+
+                <!-- Título do Passo -->
+                <h3 class="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight leading-snug">
+                  03. Desenvolvimento, Aprovação e Publicação
+                </h3>
+
+                <!-- Descrição -->
+                <p class="text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                  Nossa equipe monta seu site com foco total em conversão e entrega para sua revisão. Ajustamos o que for necessário e colocamos sua empresa oficialmente no ar!
+                </p>
+              </div>
+
+              <!-- Ícone Semântico Discreto na Base -->
+              <div class="pt-5 border-t border-white/5 flex items-center justify-between text-[#2EC97A]">
+                <span class="text-xs font-mono uppercase tracking-wider text-white/40">Entrega & Publicação</span>
+                <iconify-icon icon="solar:rocket-2-linear" class="text-2xl group-hover:scale-110 transition-transform"></iconify-icon>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Botão CTA Mobile (Abaixo dos cards dos passos no mobile) -->
+        <div class="mt-10 w-full flex lg:hidden justify-center">
+          <a href="#planos" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#2EC97A] hover:bg-[#25b56b] text-[#040807] font-bold text-xs sm:text-sm uppercase tracking-wider shadow-[0_10px_25px_rgba(46,201,122,0.3)] hover:shadow-[0_15px_30px_rgba(46,201,122,0.45)] transition-all duration-300 text-center">
+            QUERO MEU SITE EM 3 PASSOS
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 7. SEÇÃO 7 — O QUE ESTÁ INCLUSO (DIAGRAMAÇÃO BENTO GRID HIGH-TECH INSPIRADA NA REFERÊNCIA) -->
+    <section class="relative py-16 sm:py-24 px-6 bg-[#040807] border-t border-emerald-950/40 text-white overflow-hidden" id="o-que-esta-incluso">
+      
+      <!-- Ambient Glows Verdes / Bioluminescência -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-[radial-gradient(ellipse,rgba(46,201,122,0.08)_0%,transparent_70%)] blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto relative z-10">
+        
+        <!-- HEADER CENTRALIZADO (Como na referência) -->
+        <div class="text-center max-w-3xl mx-auto mb-16 sm:mb-20 space-y-4">
+          <!-- Eyebrow Pill -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#2EC97A]/30 bg-[#2EC97A]/5 backdrop-blur-md text-[#2EC97A] text-[10px] md:text-[11px] font-mono font-medium uppercase tracking-widest shadow-[0_0_15px_rgba(46,201,122,0.12)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A] animate-pulse shadow-[0_0_6px_#2EC97A]"></span>
+            O QUE ESTÁ INCLUSO
+          </div>
+
+          <!-- Titulo -->
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.12]">
+            <span class="text-[#2EC97A]">Uma estrutura digital completa,</span> moderna e sem pegadinhas.
+          </h2>
+
+          <!-- Subtitulo -->
+          <p class="text-base sm:text-lg text-white/70 font-light leading-relaxed">
+            Sem custos ocultos de manutenção, sem taxas surpresa e sem contratos de fidelidade que prendem você. Cancele quando quiser, estilo Netflix.
+          </p>
+        </div>
+
+        <!-- GRID DE 6 CARDS (2 LINHAS COM 3 CARDS CADA - MESMO TAMANHO E IMAGENS TEMÁTICAS) -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 items-stretch">
+          
+          <!-- Card 1: Design Premium & Personalizado -->
+          <div class="rounded-3xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Imagem -->
+            <div class="w-full h-52 sm:h-56 bg-[#050C09] border-b border-white/5 relative overflow-hidden flex items-center justify-center">
+              <img src="Assets/design-premium-personalizado.png" alt="Design Premium & Personalizado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <div class="p-7 sm:p-8 space-y-2.5 flex-1 flex flex-col justify-start">
+              <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug">
+                Design Premium & Personalizado
+              </h3>
+              <p class="text-sm text-white/65 leading-relaxed font-light">
+                Layout exclusivo que valoriza seus serviços e destaca sua empresa da concorrência amadora.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2: 100% Responsivo -->
+          <div class="rounded-3xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Imagem -->
+            <div class="w-full h-52 sm:h-56 bg-[#050C09] border-b border-white/5 relative overflow-hidden flex items-center justify-center">
+              <img src="Assets/100-responsivo.png" alt="100% Responsivo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <div class="p-7 sm:p-8 space-y-2.5 flex-1 flex flex-col justify-start">
+              <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug">
+                100% Responsivo
+              </h3>
+              <p class="text-sm text-white/65 leading-relaxed font-light">
+                Carregamento impecável e navegação fluida em celulares, tablets e computadores.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3: Integração com WhatsApp e Redes -->
+          <div class="rounded-3xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Imagem -->
+            <div class="w-full h-52 sm:h-56 bg-[#050C09] border-b border-white/5 relative overflow-hidden flex items-center justify-center">
+              <img src="Assets/integracao-whatsapp-redes.png" alt="Integração com WhatsApp e Redes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <div class="p-7 sm:p-8 space-y-2.5 flex-1 flex flex-col justify-start">
+              <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug">
+                Integração com WhatsApp e Redes
+              </h3>
+              <p class="text-sm text-white/65 leading-relaxed font-light">
+                Canais de atendimento sincronizados para facilitar o contato imediato do visitante.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 4: Estrutura Preparada para SEO -->
+          <div class="rounded-3xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Imagem -->
+            <div class="w-full h-52 sm:h-56 bg-[#050C09] border-b border-white/5 relative overflow-hidden flex items-center justify-center">
+              <img src="Assets/estrutura-seo.png" alt="Estrutura Preparada para SEO" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <div class="p-7 sm:p-8 space-y-2.5 flex-1 flex flex-col justify-start">
+              <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug">
+                Estrutura Preparada para SEO
+              </h3>
+              <p class="text-sm text-white/65 leading-relaxed font-light">
+                Código limpo e tags organizadas para ajudar o Google a indexar e recomendar suas páginas.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 5: Velocidade Ultra-Rápida -->
+          <div class="rounded-3xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Imagem -->
+            <div class="w-full h-52 sm:h-56 bg-[#050C09] border-b border-white/5 relative overflow-hidden flex items-center justify-center">
+              <img src="Assets/velocidade-ultra-rapida.png" alt="Velocidade Ultra-Rápida" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <div class="p-7 sm:p-8 space-y-2.5 flex-1 flex flex-col justify-start">
+              <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug">
+                Velocidade Ultra-Rápida
+              </h3>
+              <p class="text-sm text-white/65 leading-relaxed font-light">
+                Páginas leves que carregam em segundos para não perder visitantes impacientes.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 6: Suporte Contínuo -->
+          <div class="rounded-3xl bg-[#08120E] border border-emerald-950/80 hover:border-[#2EC97A]/50 transition-all duration-300 group flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <!-- Imagem -->
+            <div class="w-full h-52 sm:h-56 bg-[#050C09] border-b border-white/5 relative overflow-hidden flex items-center justify-center">
+              <img src="Assets/suporte-continuo.png" alt="Suporte Contínuo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#08120E] via-transparent to-transparent opacity-60 pointer-events-none"></div>
+            </div>
+
+            <div class="p-7 sm:p-8 space-y-2.5 flex-1 flex flex-col justify-start">
+              <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug">
+                Suporte Contínuo
+              </h3>
+              <p class="text-sm text-white/65 leading-relaxed font-light">
+                Time dedicado de prontidão de segunda a sexta (9h às 18h) para dúvidas e solicitações.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- LETRAS MIÚDAS CENTRALIZADO (Exatamente como solicitado) -->
+        <div class="mt-14 sm:mt-16 text-center max-w-4xl mx-auto">
+          <p class="text-xs sm:text-sm text-white/50 font-light leading-relaxed md:whitespace-nowrap">
+            Termos de cancelamento: Caso opte por cancelar, seu site continua ativo até o término do ciclo mensal.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 8. SEÇÃO VÍDEO / MANIFESTO (Referência visual da moldura com glow verde e background com tipografia gigante) -->
+    <section class="py-16 sm:py-20 relative overflow-hidden bg-[#040807] border-t border-emerald-950/40" id="video-manifesto">
+      
+      <!-- Efeitos de Fundo: Glow verde e tipografia gigante de fundo como na referência -->
+      <div class="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        <!-- Radial Glow Superior Central -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] md:w-[950px] h-[450px] bg-[#2EC97A]/12 rounded-full blur-[140px]"></div>
+        
+        <!-- Tipografia Gigante Verde de Fundo (Como o texto vazado na referência) -->
+        <div class="absolute bottom-6 sm:bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-[0.04] text-[16vw] font-black tracking-tighter text-[#2EC97A] pointer-events-none leading-none select-none">
+          SITEONLAB
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <!-- CABEÇALHO CENTRALIZADO -->
+        <div class="text-center max-w-5xl mx-auto space-y-6 mb-12 sm:mb-16">
+          
+          <!-- Logo SiteOnLab (+10% em relação ao header, oculto no mobile) -->
+          <div class="hidden sm:flex items-center justify-center">
+            <img src="Assets/LOGOTIPO.png" alt="SiteOnLab Logo" class="h-[35px] md:h-[40px] w-auto object-contain">
+          </div>
+
+          <!-- Titulo -->
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.2] max-w-5xl mx-auto">
+            <span class="text-[#2EC97A] sm:whitespace-nowrap">A internet não deveria ser um privilégio</span><br class="hidden sm:inline">
+            <span class="sm:whitespace-nowrap">apenas para quem tem rios de dinheiro.</span>
+          </h2>
+
+          <!-- Subtitulo -->
+          <p class="text-base sm:text-lg text-white/70 font-light leading-relaxed max-w-3xl mx-auto">
+            Assista ao vídeo abaixo e entenda por que o nosso modelo por assinatura está incomodando o mercado tradicional de agências:
+          </p>
+
+        </div>
+
+        <!-- MOLDURA DO VÍDEO (Estilo referência: frame com borda arredondada, neon glow e play pulsante) -->
+        <div class="relative max-w-4xl mx-auto">
+          
+          <!-- Aura de iluminação neon verde atrás do player -->
+          <div class="absolute -inset-1.5 bg-gradient-to-r from-[#2EC97A]/40 via-[#4AE396]/50 to-[#2EC97A]/40 rounded-[28px] sm:rounded-[36px] blur-xl opacity-75 group-hover:opacity-100 transition duration-1000"></div>
+
+          <!-- Moldura Externa com borda brilhante e cantos elegantes -->
+          <div class="relative rounded-[24px] sm:rounded-[32px] p-2 sm:p-3 bg-gradient-to-b from-[#2EC97A]/40 via-[#0D1A14] to-[#040807] border border-[#2EC97A]/50 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(46,201,122,0.25)]">
+            
+            <!-- Container do Vídeo / Aspect Ratio 16:9 Adaptado (Vimeo) -->
+            <div id="video-wrapper" class="relative w-full aspect-video rounded-[18px] sm:rounded-[24px] overflow-hidden bg-black border border-white/10 shadow-inner group cursor-pointer">
+              <iframe 
+                id="vimeo-player"
+                class="w-full h-full object-cover" 
+                src="https://player.vimeo.com/video/1235267573?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                title="Porque escolher a SiteOnLab" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+              </iframe>
+
+              <!-- Overlay com Botão de Play Pulsante Chamativo (Some ao clicar) -->
+              <div id="video-play-overlay" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center transition-all duration-500 z-20 group-hover:bg-black/25">
+                <div class="relative flex items-center justify-center pointer-events-none">
+                  <!-- Anel pulsante de onda neon verde -->
+                  <div class="absolute w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-[#2EC97A]/35 animate-ping"></div>
+                  <div class="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full border border-[#2EC97A]/40 animate-pulse"></div>
+                  
+                  <!-- Botão de Play Circular Verde Neon com Brilho -->
+                  <button type="button" aria-label="Assistir ao vídeo" class="relative z-10 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#2EC97A] text-[#040807] flex items-center justify-center shadow-[0_0_35px_rgba(46,201,122,0.8),inset_0_2px_4px_rgba(255,255,255,0.7)] group-hover:scale-110 group-hover:bg-[#4AE396] transition-all duration-300">
+                    <iconify-icon icon="solar:play-bold" class="text-2xl sm:text-3xl ml-1 text-[#040807]"></iconify-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Botão CTA Abaixo do Vídeo -->
+        <div class="mt-8 sm:mt-10 flex justify-center">
+          <a href="#planos" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#2EC97A] hover:bg-[#25b56b] text-[#040807] font-bold text-sm sm:text-base tracking-wide shadow-[0_10px_25px_rgba(46,201,122,0.35)] hover:shadow-[0_15px_30px_rgba(46,201,122,0.5)] transition-all duration-300 transform hover:-translate-y-0.5 text-center">
+            Quero meu site profissional
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 9. SEÇÃO COMPARATIVA: ANTES E DEPOIS (Fundo Branco, Design System) -->
+    <section class="py-16 sm:py-20 relative overflow-hidden bg-white text-[#040807]" id="comparativo">
+      
+      <!-- Detalhe sutil de grid/textura ao fundo para manter a sofisticação da marca -->
+      <div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(rgba(0,0,0,0.4)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.4)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <!-- TÍTULO DA SEÇÃO -->
+        <div class="text-center max-w-4xl mx-auto space-y-4 mb-14 sm:mb-20">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#08120E]/5 border border-[#08120E]/10 text-xs font-mono font-medium text-[#08120E]/70 uppercase tracking-wider mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]"></span>
+            Comparativo Direto
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#040807] leading-[1.15]">
+            Por que a <span class="text-[#1FA360]">SiteOnLab</span> é a escolha mais inteligente para o seu negócio?
+          </h2>
+        </div>
+
+        <!-- GRID DE COMPARAÇÃO (2 COLUNAS: ESQUERDA CINZA ESCURO / DIREITA VERDE SITEONLAB) -->
+        <div class="grid lg:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
+          
+          <!-- COLUNA 1: ANTES / O QUE VOCÊ ENCONTRA POR AÍ (Cinza Escuro Tecnológico) -->
+          <div class="rounded-3xl bg-[#08120E] border border-white/10 py-10 sm:py-14 md:py-[72px] px-6 sm:px-10 md:px-[50px] flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.12)] relative overflow-hidden text-white group transition-all duration-300">
+            <!-- Grid sutil tech de fundo -->
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+
+            <div class="space-y-6 relative z-10">
+              <!-- Cabeçalho do Card Freelancer -->
+              <div class="pb-6 border-b border-white/10 space-y-2 text-center sm:text-left flex flex-col items-center sm:items-start">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold uppercase tracking-wider shadow-[0_2px_10px_rgba(239,68,68,0.15)]">
+                  <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                  Modelo Tradicional
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-white/90">
+                  O que você encontra<br>
+                  no mercado <span class="text-white/50 text-lg sm:text-xl font-normal">(freelancer tradicional)</span>
+                </h3>
+              </div>
+
+              <!-- Lista de Itens do Freelancer -->
+              <div class="space-y-3 sm:space-y-3.5">
+                
+                <!-- Item 1 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
+                  <span class="text-base shrink-0 leading-none select-none text-red-400/90 font-mono font-bold">❌</span>
+                  <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                    Não escreve textos estratégicos <span class="text-white/40">(você tem que se virar)</span>
+                  </p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
+                  <span class="text-base shrink-0 leading-none select-none text-red-400/90 font-mono font-bold">❌</span>
+                  <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                    Usa templates prontos, copiados de outros sites
+                  </p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
+                  <span class="text-base shrink-0 leading-none select-none text-red-400/90 font-mono font-bold">❌</span>
+                  <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                    Atrasos constantes, sumiço e falta de retorno
+                  </p>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
+                  <span class="text-base shrink-0 leading-none select-none text-red-400/90 font-mono font-bold">❌</span>
+                  <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                    Entrega o arquivo e desaparece <span class="text-white/40">(sem suporte)</span>
+                  </p>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
+                  <span class="text-base shrink-0 leading-none select-none text-red-400/90 font-mono font-bold">❌</span>
+                  <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                    Hospedagem, domínio e manutenção pagos à parte
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Footer Card 1: Investimento Freelancer -->
+            <div class="mt-8 pt-6 border-t border-white/10 relative z-10">
+              <div class="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 space-y-1">
+                <span class="text-xs text-white/50 uppercase tracking-widest block font-medium font-mono">Investimento:</span>
+                <div class="text-xl sm:text-2xl font-bold text-white/90">
+                  R$ 2.000 a R$ 4.000 à vista
+                </div>
+                <p class="text-xs sm:text-sm font-normal text-white/50">
+                  (sem garantia)
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- COLUNA 2: DEPOIS / O QUE VOCÊ RECEBE NA SITEONLAB (Verde Tecnológico com Itens Brancos) -->
+          <div class="rounded-3xl bg-gradient-to-br from-[#1FA360] via-[#2ABF7B] to-[#1FA360] py-10 sm:py-14 md:py-[72px] px-6 sm:px-10 md:px-[50px] flex flex-col justify-between shadow-[0_25px_60px_-10px_rgba(46,201,122,0.45)] relative overflow-hidden text-[#040807] border-2 border-[#4AE396]/60 transform lg:-translate-y-2 group transition-all duration-300">
+            <!-- Grid sutil tech de fundo do card verde -->
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+            
+            <!-- Glow e reflexos no card verde -->
+            <div class="absolute -top-24 -right-24 w-80 h-80 bg-white/25 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="space-y-6 relative z-10">
+              <!-- Cabeçalho do Card SiteOnLab -->
+              <div class="pb-6 border-b border-black/10 space-y-2 text-center sm:text-left flex flex-col items-center sm:items-start">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#0B3D25] text-xs font-mono font-bold uppercase tracking-wider shadow-[0_2px_10px_rgba(0,0,0,0.08)]">
+                  <span class="w-2 h-2 rounded-full bg-[#1FA360] animate-pulse"></span>
+                  A Solução Definitiva
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#040807]">
+                  O que você recebe<br>
+                  <span class="text-white">no SiteOnLab</span>
+                </h3>
+              </div>
+
+              <!-- Lista de Itens SiteOnLab (Fundo Branco para Máximo Destaque & Ícones Verdes Simples) -->
+              <div class="space-y-3 sm:space-y-3.5">
+                
+                <!-- Item 1 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all">
+                  <iconify-icon icon="solar:check-circle-bold" class="text-xl shrink-0 text-[#1FA360]"></iconify-icon>
+                  <p class="text-sm sm:text-base text-[#08120E] font-normal leading-relaxed">
+                    <strong class="font-bold text-[#040807]">Textos persuasivos inclusos</strong>, escritos por especialistas
+                  </p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all">
+                  <iconify-icon icon="solar:check-circle-bold" class="text-xl shrink-0 text-[#1FA360]"></iconify-icon>
+                  <p class="text-sm sm:text-base text-[#08120E] font-normal leading-relaxed">
+                    <strong class="font-bold text-[#040807]">Visual moderno e alinhado</strong> à identidade do seu negócio
+                  </p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all">
+                  <iconify-icon icon="solar:check-circle-bold" class="text-xl shrink-0 text-[#1FA360]"></iconify-icon>
+                  <p class="text-sm sm:text-base text-[#08120E] font-normal leading-relaxed">
+                    <strong class="font-bold text-[#040807]">Entrega ágil</strong> em poucos dias com processo transparente
+                  </p>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all">
+                  <iconify-icon icon="solar:check-circle-bold" class="text-xl shrink-0 text-[#1FA360]"></iconify-icon>
+                  <p class="text-sm sm:text-base text-[#08120E] font-normal leading-relaxed">
+                    <strong class="font-bold text-[#040807]">Suporte contínuo</strong> durante todo o período da sua assinatura
+                  </p>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] border border-white hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)] transition-all">
+                  <iconify-icon icon="solar:check-circle-bold" class="text-xl shrink-0 text-[#1FA360]"></iconify-icon>
+                  <p class="text-sm sm:text-base text-[#08120E] font-normal leading-relaxed">
+                    <strong class="font-bold text-[#040807]">Hospedagem inclusa</strong> e infraestrutura gerenciada
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Footer Card 2: Investimento SiteOnLab -->
+            <div class="mt-8 pt-6 border-t border-black/10 relative z-10">
+              <div class="p-4 sm:p-5 rounded-2xl bg-white shadow-[0_8px_25px_rgba(0,0,0,0.12)] border border-white space-y-1">
+                <span class="text-xs text-[#0B3D25]/70 uppercase tracking-widest block font-mono font-bold">Investimento:</span>
+                <div class="text-2xl sm:text-3xl font-black text-[#040807] tracking-tight">
+                  A partir de R$ 97/mês
+                </div>
+                <p class="text-xs sm:text-sm font-semibold text-[#1FA360]">
+                  (sem fidelidade)
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 10. FAIXA DE AUTORIDADE & MÉTRICAS (Fundo Verde, Design System - Estilo Referência) -->
+    <section class="py-12 sm:py-16 relative overflow-hidden bg-gradient-to-r from-[#1FA360] via-[#2ABF7B] to-[#1FA360] text-[#040807] border-y border-[#4AE396]/40 shadow-[0_15px_35px_rgba(46,201,122,0.25)]" id="faixa-metricas">
+      
+      <!-- Detalhes de iluminação sutil -->
+      <div class="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <!-- Grid de Métricas: 2 colunas lado a lado no mobile, 3 colunas no desktop -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 md:gap-12 items-center text-center">
+          
+          <!-- Métrica 1 -->
+          <div class="flex flex-col items-center justify-center space-y-1.5 group">
+            <span class="text-[11px] sm:text-xs md:text-sm font-bold tracking-[0.14em] sm:tracking-[0.18em] uppercase text-[#040807]">
+              EXPERIÊNCIA DIGITAL
+            </span>
+            <div class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-300">
+              +10 anos
+            </div>
+          </div>
+
+          <!-- Métrica 2 -->
+          <div class="flex flex-col items-center justify-center space-y-1.5 group border-l md:border-x border-[#0B3D25]/20 md:border-[#0B3D25]/25 pl-4 sm:pl-0 md:px-6">
+            <span class="text-[11px] sm:text-xs md:text-sm font-bold tracking-[0.14em] sm:tracking-[0.18em] uppercase text-[#040807]">
+              SITES ENTREGUES
+            </span>
+            <div class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-300">
+              +500
+            </div>
+          </div>
+
+          <!-- Métrica 3 (Oculta no mobile, exibida no desktop) -->
+          <div class="hidden md:flex flex-col items-center justify-center space-y-1.5 group col-span-2 md:col-span-1">
+            <span class="text-xs sm:text-sm font-bold tracking-[0.18em] uppercase text-[#040807]">
+              RESULTADOS PARA CLIENTES
+            </span>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-300">
+              +R$ 1 milhão
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 11. SEÇÃO PLANOS & PREÇOS -->
+    <section class="pt-20 sm:pt-24 pb-12 sm:pb-14 relative overflow-hidden bg-[#040807] text-white border-t border-emerald-950/40" id="planos">
+      
+      <!-- Ambient Glow & Subtle Texture de Fundo -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden select-none">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#2EC97A]/10 rounded-full blur-[140px]"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <!-- CABEÇALHO DA SEÇÃO (Centralizado com Tag, Título e Subtítulo) -->
+        <div class="text-center max-w-3xl mx-auto space-y-4 mb-14 sm:mb-16">
+          
+          <div>
+            <span class="inline-flex items-center px-3 py-1 rounded-md bg-[#2EC97A]/10 border border-[#2EC97A]/30 text-xs font-mono font-bold tracking-widest text-[#2EC97A] uppercase">
+              PLANOS
+            </span>
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.15]">
+            Escolha o plano ideal para colocar <span class="text-[#2EC97A]">sua empresa no ar hoje.</span>
+          </h2>
+
+          <p class="text-white/70 text-base sm:text-lg font-light leading-relaxed max-w-2xl mx-auto">
+            Cancele quando quiser. Estilo Netflix.<br>
+            Sem contratos de longo prazo, sem letras miúdas abusivas.
+          </p>
+
+        </div>
+
+        <!-- BADGE ASSINATURA MENSAL (Disposto na Vertical) -->
+        <div class="flex justify-center mb-12 sm:mb-16">
+          <div class="inline-flex flex-col items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#08120E] border border-[#2EC97A]/30 text-white shadow-[0_10px_25px_rgba(0,0,0,0.5)] text-center">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#2EC97A] shadow-[0_0_8px_#2EC97A]"></span>
+              <span class="text-xs sm:text-sm font-semibold tracking-wide text-white/90">Assinatura Mensal Recorrente</span>
+            </div>
+            <span class="text-[10px] sm:text-[11px] font-mono text-[#2EC97A] font-bold uppercase tracking-wider bg-[#2EC97A]/15 px-3 py-1 rounded-full border border-[#2EC97A]/30">
+              Sem Fidelidade
+            </span>
+          </div>
+        </div>
+
+        <!-- GRID DE CARDS DOS PLANOS (2 PLANOS: ESSENCIAL & PRO COM DESTAQUE "O MAIS ESCOLHIDO") -->
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-10 items-stretch max-w-4xl mx-auto">
+          
+          <!-- 1. PLANO ESSENCIAL -->
+          <div class="rounded-3xl bg-[#08120E] border border-white/10 hover:border-white/20 transition-all duration-300 p-6 sm:p-8 md:p-10 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden group">
+            
+            <div class="space-y-6">
+              <!-- Topo do Card (Centralizado) -->
+              <div class="space-y-2 text-center flex flex-col items-center">
+                <div class="flex items-center justify-center">
+                  <h3 class="text-2xl font-bold text-white tracking-tight flex items-center justify-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-[#2EC97A]/10 border border-[#2EC97A]/25 flex items-center justify-center text-[#2EC97A] shadow-[0_0_12px_rgba(46,201,122,0.15)]">
+                      <iconify-icon icon="solar:stars-minimalistic-bold" class="text-lg"></iconify-icon>
+                    </div>
+                    <span>PLANO ESSENCIAL</span>
+                  </h3>
+                </div>
+                <p class="text-sm text-white/60 font-light leading-relaxed text-center max-w-xs mx-auto">
+                  Para quem quer marcar presença profissional e começar a receber contatos.
+                </p>
+              </div>
+
+              <!-- Bloco de Preço (Centralizado e Maior) -->
+              <div class="py-6 border-y border-white/10 space-y-2 text-center flex flex-col items-center justify-center">
+                <div class="flex items-baseline justify-center gap-2">
+                  <span class="text-sm sm:text-base text-[#2EC97A]/80 font-mono font-bold">R$</span>
+                  <span class="text-5xl sm:text-6xl font-black text-[#2EC97A] tracking-tight drop-shadow-[0_0_20px_rgba(46,201,122,0.3)]">
+                    97
+                  </span>
+                  <span class="text-sm sm:text-base text-white/60 font-light">/ mês</span>
+                </div>
+                <!-- Taxa de Adesão -->
+                <div>
+                  <p class="text-xs text-white/50 font-light text-center">
+                    Taxa única de setup/adesão: R$ 200,00
+                  </p>
+                </div>
+              </div>
+
+              <!-- Lista de Inclusos -->
+              <div class="space-y-3.5 pt-2">
+                <span class="text-xs font-mono uppercase tracking-wider text-white/50 block font-semibold">
+                  Tudo o que está incluso:
+                </span>
+                
+                <ul class="space-y-3.5 text-sm text-white/75 font-light leading-relaxed">
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:laptop-minimalistic-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Site profissional one-page de alta conversão*</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:pallete-2-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Design personalizado e alinhado à sua marca</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:pen-new-square-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Textos e estrutura desenvolvidos pela nossa equipe</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:server-square-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Hospedagem premium inclusa</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:magnifer-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Otimização para mecanismos de busca (SEO básico)</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:chat-round-dots-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Botão flutuante de WhatsApp e links para redes sociais</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:smartphone-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Layout 100% adaptado para celulares</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:refresh-square-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Até 3 solicitações de alterações/ajustes todo mês</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:chart-square-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Instalação de pixel de rastreamento (Meta/Google Ads)</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                      <iconify-icon icon="solar:headphones-round-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Suporte contínuo em horário comercial</span>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+
+            <!-- Botão CTA Essencial (Cor Branca tanto no mobile quanto no desk) -->
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <a href="https://painel.siteonlab.com.br/assinar/plano-essencial" class="w-full py-4 px-6 rounded-full bg-white hover:bg-white/90 text-[#040807] font-extrabold text-sm tracking-wide text-center transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.35)] hover:scale-[1.02]">
+                ASSINAR O PLANO ESSENCIAL
+                <iconify-icon icon="solar:arrow-right-linear" class="text-base font-bold"></iconify-icon>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- 2. PLANO PRO (O MAIS ESCOLHIDO - Card com Borda e Destaque Estilo Referência) -->
+          <div class="rounded-3xl bg-[#08120E] border-2 border-[#2EC97A] p-6 sm:p-8 md:p-10 flex flex-col justify-between shadow-[0_25px_60px_rgba(0,0,0,0.8),0_0_35px_rgba(46,201,122,0.18)] relative overflow-hidden group transform md:-translate-y-2">
+            
+            <!-- Badge Superior no Topo Direito (Exatamente como o "MAIS ESCOLHIDO" na referência) -->
+            <div class="absolute top-0 right-0">
+              <span class="px-4 py-1.5 rounded-bl-2xl bg-[#2EC97A] text-[#040807] text-xs font-black uppercase tracking-wider shadow-md">
+                O MAIS ESCOLHIDO
+              </span>
+            </div>
+
+            <div class="space-y-6">
+              <!-- Topo do Card (Centralizado) -->
+              <div class="space-y-2 pt-2 text-center flex flex-col items-center">
+                <div class="flex items-center justify-center">
+                  <h3 class="text-2xl font-bold text-white tracking-tight flex items-center justify-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-[#2EC97A] text-[#040807] flex items-center justify-center shadow-[0_0_15px_rgba(46,201,122,0.4)]">
+                      <iconify-icon icon="solar:rocket-bold" class="text-lg"></iconify-icon>
+                    </div>
+                    <span>PLANO PRO</span>
+                  </h3>
+                </div>
+                <p class="text-sm text-white/60 font-light leading-relaxed text-center max-w-xs mx-auto">
+                  Para empresas que querem acelerar vendas e ter inteligência sobre seus visitantes.
+                </p>
+              </div>
+
+              <!-- Bloco de Preço (Centralizado e Maior) -->
+              <div class="py-6 border-y border-white/10 space-y-2 text-center flex flex-col items-center justify-center">
+                <div class="flex items-baseline justify-center gap-2">
+                  <span class="text-sm sm:text-base text-[#2EC97A]/80 font-mono font-bold">R$</span>
+                  <span class="text-5xl sm:text-6xl font-black text-[#2EC97A] tracking-tight drop-shadow-[0_0_20px_rgba(46,201,122,0.3)]">
+                    149
+                  </span>
+                  <span class="text-sm sm:text-base text-white/60 font-light">/ mês</span>
+                </div>
+                <!-- Taxa de Adesão -->
+                <div>
+                  <p class="text-xs text-white/50 font-light text-center">
+                    Taxa única de setup/adesão: R$ 200,00
+                  </p>
+                </div>
+              </div>
+
+              <!-- Lista de Inclusos PRO -->
+              <div class="space-y-3.5 pt-2">
+                <span class="text-xs font-mono uppercase tracking-wider text-[#2EC97A] block font-bold">
+                  Tudo o que está no Essencial, e mais:
+                </span>
+                
+                <ul class="space-y-3.5 text-sm text-white/85 font-light leading-relaxed">
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A] text-[#040807] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_8px_rgba(46,201,122,0.3)]">
+                      <iconify-icon icon="solar:radar-2-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span><strong class="font-bold text-white">Ferramenta Radar SiteOnLab:</strong> Descubra quem visita seu site, de onde vêm os acessos e quais serviços chamam mais atenção</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A] text-[#040807] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_8px_rgba(46,201,122,0.3)]">
+                      <iconify-icon icon="solar:bolt-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span><strong class="font-bold text-white">Mais flexibilidade:</strong> Até 5 alterações mensais inclusas</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-md bg-[#2EC97A] text-[#040807] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_8px_rgba(46,201,122,0.3)]">
+                      <iconify-icon icon="solar:shield-star-bold" class="text-xs"></iconify-icon>
+                    </div>
+                    <span>Suporte prioritário</span>
+                  </li>
+                </ul>
+
+                <!-- Observação de Downgrade -->
+                <div class="pt-2 text-xs text-white/40 italic font-light">
+                  *(Downgrade para o plano essencial disponível após 6 meses)*
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Botão CTA PRO com Brilho do Design System -->
+            <div class="mt-8 pt-6 border-t border-white/10">
+              <a href="https://painel.siteonlab.com.br/assinar/plano-pro" class="btn-pill-primary w-full py-4 px-6 text-sm tracking-wide text-center flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(46,201,122,0.4)] hover:brightness-110 transition-all duration-300">
+                ASSINAR O PLANO PRO
+                <iconify-icon icon="solar:arrow-right-linear" class="text-base"></iconify-icon>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- LETRAS MIÚDAS CENTRALIZADO (Escopo padrão) -->
+        <div class="mt-12 sm:mt-16 text-center max-w-3xl mx-auto">
+          <p class="text-xs text-white/50 font-light leading-relaxed">
+            *O escopo padrão refere-se ao desenvolvimento de página única institucional focada em conversão. Para portais com múltiplas páginas, consulte condições personalizadas com nosso time.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 12. SEÇÃO GARANTIA (Diagramação Fiel à Referência: Selo Circular Circular/Radar de 7 Dias à Esquerda e Textos/Destaques à Direita) -->
+    <section class="pt-12 sm:pt-16 pb-20 sm:pb-24 relative overflow-hidden bg-[#040807] text-white border-t border-emerald-950/40" id="garantia">
+      
+      <!-- Ambient Glow & Subtle Texture de Fundo -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden select-none">
+        <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#2EC97A]/08 rounded-full blur-[150px]"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <!-- LADO ESQUERDO: SELO CIRCULAR HOLOGRÁFICO "7 DIAS" (Idêntico ao design da referência com órbita giratória, arco verde neon e anel de texto) -->
+          <div class="lg:col-span-5 flex items-center justify-center">
+            
+            <div class="relative w-[300px] h-[300px] sm:w-[380px] sm:h-[380px] flex items-center justify-center select-none group">
+              
+              <!-- Glow suave no centro -->
+              <div class="absolute inset-0 bg-[#2EC97A]/10 rounded-full blur-2xl pointer-events-none"></div>
+
+              <!-- Anel 1: Círculo Externo com Texto Circular Rotativo SVG (7 DIAS DE GARANTIA • RISCO ZERO) -->
+              <div class="absolute inset-0 animate-[spin_35s_linear_infinite]">
+                <svg class="w-full h-full" viewBox="0 0 380 380">
+                  <path id="textCirclePath" d="M 190, 190 m -160, 0 a 160,160 0 1,1 320,0 a 160,160 0 1,1 -320,0" fill="none" />
+                  <text class="text-[9.5px] font-mono tracking-[0.22em] fill-white/40 uppercase">
+                    <textPath href="#textCirclePath" startOffset="0%">
+                      7 DIAS DE GARANTIA • RISCO ZERO • 7 DIAS DE GARANTIA • RISCO ZERO •
+                    </textPath>
+                  </text>
+                </svg>
+              </div>
+
+              <!-- Anel 2: Anel de Linha Tracejada / Borda com Segmento Neon Verde -->
+              <div class="absolute w-[82%] h-[82%] rounded-full border border-white/10 flex items-center justify-center">
+                <!-- Segmento de arco verde neon como na referência -->
+                <svg class="absolute inset-0 w-full h-full -rotate-45" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="48" fill="none" stroke="#2EC97A" stroke-width="2.5" stroke-dasharray="75 220" stroke-linecap="round" class="filter drop-shadow-[0_0_8px_#2EC97A]" />
+                </svg>
+                
+                <!-- Ponto orbital de detalhe -->
+                <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#2EC97A] shadow-[0_0_10px_#2EC97A]"></div>
+              </div>
+
+              <!-- Anel 3: Círculo Interno Fino -->
+              <div class="absolute w-[68%] h-[68%] rounded-full border border-white/15"></div>
+
+              <!-- Centro: O Grande Número 7 + DIAS -->
+              <div class="relative z-10 flex flex-col items-center justify-center">
+                <span class="text-7xl sm:text-9xl font-black text-white tracking-tighter leading-none drop-shadow-[0_4px_25px_rgba(0,0,0,0.8)] font-sans">
+                  7
+                </span>
+                <span class="text-[11px] sm:text-xs font-mono font-bold tracking-[0.35em] text-[#2EC97A] uppercase mt-1">
+                  DIAS
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- LADO DIREITO: CONTEÚDO DA GARANTIA (Copy Exata e Diagramação Refinada) -->
+          <div class="lg:col-span-7 space-y-7 text-center lg:text-left flex flex-col items-center lg:items-start">
+            
+            <!-- Tag Superior // 09 · GARANTIA -->
+            <div class="flex items-center justify-center lg:justify-start gap-2 text-xs font-mono font-bold tracking-widest text-[#2EC97A] uppercase">
+              <span class="text-white/40">///</span>
+              <span>GARANTIA</span>
+            </div>
+
+            <!-- Título Principal -->
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.15] text-center lg:text-left">
+              Teste a <span class="text-[#2EC97A]">SiteOnLab</span> com total segurança.
+            </h2>
+
+            <!-- Texto de Apoio / Copy Fornecida -->
+            <div class="space-y-4 text-white/70 text-sm sm:text-base font-light leading-relaxed text-center lg:text-left">
+              <p class="font-normal text-white/90">
+                Queremos que você dê esse passo com tranquilidade absoluta.
+              </p>
+              <p>
+                Se dentro dos primeiros <strong class="font-bold text-white">7 dias</strong> após a contratação você sentir que a solução não faz sentido para o seu momento, basta solicitar o encerramento do serviço via WhatsApp.
+              </p>
+              <p>
+                Nosso compromisso é com a transparência: o cancelamento é imediato e você recebe o reembolso de acordo com os termos do contrato, proporcional à etapa de desenvolvimento executada.
+              </p>
+            </div>
+
+            <!-- Lista de Destaques com Ícones Verdes -->
+            <div class="pt-4 space-y-3.5 border-t border-white/10 w-full text-left">
+              
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                  <iconify-icon icon="solar:check-circle-bold" class="text-sm"></iconify-icon>
+                </div>
+                <p class="text-sm sm:text-base text-white/90 leading-relaxed">
+                  <strong class="font-bold text-white">Sem fidelidade:</strong> Você é livre para cancelar sua assinatura a qualquer momento.
+                </p>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-md bg-[#2EC97A]/15 text-[#2EC97A] flex items-center justify-center shrink-0 mt-0.5">
+                  <iconify-icon icon="solar:check-circle-bold" class="text-sm"></iconify-icon>
+                </div>
+                <p class="text-sm sm:text-base text-white/90 leading-relaxed">
+                  <strong class="font-bold text-white">Transparência total:</strong> Sem burocracia ou letras escondidas.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 13. SEÇÃO DÚVIDAS FREQUENTES (Diagramação Fiel à Referência: Lado Esquerdo com Tag DÚVIDAS?, Título "Perguntas Frequentes" e Card "Ainda com dúvidas?", Lado Direito com Accordion Interativo) -->
+    <section class="py-16 sm:py-20 relative overflow-hidden bg-[#040807] text-white border-t border-emerald-950/40" id="faq">
+      
+      <!-- Ambient Glow Sutil -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden select-none">
+        <div class="absolute top-1/3 right-1/4 w-[700px] h-[500px] bg-[#2EC97A]/06 rounded-full blur-[160px]"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          <!-- COLUNA ESQUERDA: TAG, TÍTULO E CARD DE SUPORTE NO WHATSAPP (Idêntico ao layout da referência) -->
+          <div class="lg:col-span-5 space-y-8 lg:sticky lg:top-28 text-center lg:text-left flex flex-col items-center lg:items-start">
+            
+            <!-- Tag e Título -->
+            <div class="space-y-4 flex flex-col items-center lg:items-start">
+              <span class="inline-flex items-center px-3 py-1 rounded-md bg-[#2EC97A]/10 border border-[#2EC97A]/30 text-xs font-mono font-bold tracking-widest text-[#2EC97A] uppercase">
+                DÚVIDAS FREQUENTES
+              </span>
+              <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.15] text-center lg:text-left">
+                Perguntas<br>
+                <span class="text-[#2EC97A]">Frequentes</span>
+              </h2>
+              <p class="text-white/60 text-sm sm:text-base font-light leading-relaxed text-center lg:text-left">
+                Perguntas frequentes sobre a assinatura SiteOnLab.
+              </p>
+            </div>
+
+            <!-- Card de Contato / Suporte Direto no WhatsApp (Como no card com avatar da referência) -->
+            <div class="p-6 sm:p-7 rounded-3xl bg-[#08120E] border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.7)] space-y-5 relative overflow-hidden group text-left w-full sm:max-w-md lg:max-w-none mx-auto lg:mx-0">
+              <!-- Glow interno sutil -->
+              <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#2EC97A]/10 rounded-full blur-2xl pointer-events-none"></div>
+
+              <div class="flex items-center gap-3.5 relative z-10">
+                <!-- Avatar da Equipe com Indicador Online -->
+                <div class="relative">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#0D1A14] to-[#1FA360] p-0.5 shadow-md">
+                    <div class="w-full h-full rounded-full bg-[#08120E] flex items-center justify-center text-white text-xl overflow-hidden">
+                      <iconify-icon icon="solar:user-speak-rounded-bold" class="text-[#2EC97A] text-2xl"></iconify-icon>
+                    </div>
+                  </div>
+                  <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-[#2EC97A] border-2 border-[#08120E] shadow-[0_0_8px_#2EC97A]"></span>
+                </div>
+                
+                <div>
+                  <h4 class="text-base font-bold text-white tracking-tight">Ainda com dúvidas?</h4>
+                  <span class="text-xs text-[#2EC97A] font-mono">Time de suporte online</span>
+                </div>
+              </div>
+
+              <p class="text-xs sm:text-sm text-white/65 font-light leading-relaxed relative z-10">
+                Se não encontrou a resposta nas perguntas frequentes, fale com a equipe SiteOnLab no WhatsApp:
+              </p>
+
+              <!-- Botão WhatsApp com estilo do design system -->
+              <a href="https://wa.me/5512991757869?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20sobre%20o%20site%20por%20assinatura.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#2EC97A] to-[#1FA360] hover:brightness-110 text-[#040807] font-bold text-sm text-center transition-all shadow-[0_0_20px_rgba(46,201,122,0.35)] flex items-center justify-center gap-2 group-hover:scale-[1.02]">
+                <span>Falar com a equipe SiteOnLab</span>
+                <iconify-icon icon="solar:chat-round-dots-bold" class="text-lg"></iconify-icon>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- COLUNA DIREITA: ACCORDION INTERATIVO (8 PERGUNTAS E RESPOSTAS FORNECIDAS) -->
+          <div class="lg:col-span-7 divide-y divide-white/10" id="faq-accordion">
+            
+            <!-- Pergunta 1 (Aberta inicialmente como na referência) -->
+            <div class="py-5 sm:py-6 faq-item">
+              <button type="button" class="w-full flex items-center justify-between gap-4 text-left group faq-toggle" aria-expanded="true">
+                <span class="text-sm sm:text-base font-semibold text-white group-hover:text-[#2EC97A] transition-colors leading-snug">
+                  Preciso entender de tecnologia ou programação?
+                </span>
+                <span class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#2EC97A]/40 transition-colors">
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white/60 group-hover:text-[#2EC97A] transition-transform duration-300 transform rotate-180 faq-icon"></iconify-icon>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden transition-all duration-300 max-h-96 pt-3.5 opacity-100">
+                <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                  <strong class="font-bold text-white">Não, absolutamente nada.</strong> Você só responde às perguntas sobre o seu negócio no Briefing Lab e a nossa equipe cuida de toda a parte técnica, do design e dos textos.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="py-5 sm:py-6 faq-item">
+              <button type="button" class="w-full flex items-center justify-between gap-4 text-left group faq-toggle" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-white group-hover:text-[#2EC97A] transition-colors leading-snug">
+                  Em quanto tempo meu site fica pronto?
+                </span>
+                <span class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#2EC97A]/40 transition-colors">
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white/60 group-hover:text-[#2EC97A] transition-transform duration-300 faq-icon"></iconify-icon>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden transition-all duration-300 max-h-0 pt-0 opacity-0">
+                <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                  A previsão de entrega da primeira versão é de <strong class="font-bold text-white">até 5 dias úteis</strong>, contados a partir do envio das informações do seu negócio.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="py-5 sm:py-6 faq-item">
+              <button type="button" class="w-full flex items-center justify-between gap-4 text-left group faq-toggle" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-white group-hover:text-[#2EC97A] transition-colors leading-snug">
+                  Meu site vai aparecer nas buscas do Google?
+                </span>
+                <span class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#2EC97A]/40 transition-colors">
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white/60 group-hover:text-[#2EC97A] transition-transform duration-300 faq-icon"></iconify-icon>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden transition-all duration-300 max-h-0 pt-0 opacity-0">
+                <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                  <strong class="font-bold text-white">Sim.</strong> Seu site é construído seguindo todas as boas práticas de SEO técnico, com carregamento rápido e tags semânticas para facilitar a leitura e indexação pelos robôs do Google.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="py-5 sm:py-6 faq-item">
+              <button type="button" class="w-full flex items-center justify-between gap-4 text-left group faq-toggle" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-white group-hover:text-[#2EC97A] transition-colors leading-snug">
+                  Posso usar o site para rodar anúncios no Instagram, Facebook e Google?
+                </span>
+                <span class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#2EC97A]/40 transition-colors">
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white/60 group-hover:text-[#2EC97A] transition-transform duration-300 faq-icon"></iconify-icon>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden transition-all duration-300 max-h-0 pt-0 opacity-0">
+                <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                  <strong class="font-bold text-white">Com certeza.</strong> Seu site é estruturado para suportar tráfego pago e conta com espaço para instalação de pixels de rastreamento para mensurar seus resultados.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pergunta 5 -->
+            <div class="py-5 sm:py-6 faq-item">
+              <button type="button" class="w-full flex items-center justify-between gap-4 text-left group faq-toggle" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-white group-hover:text-[#2EC97A] transition-colors leading-snug">
+                  Existe contrato de fidelidade ou multa rescisória?
+                </span>
+                <span class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#2EC97A]/40 transition-colors">
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white/60 group-hover:text-[#2EC97A] transition-transform duration-300 faq-icon"></iconify-icon>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden transition-all duration-300 max-h-0 pt-0 opacity-0">
+                <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                  <strong class="font-bold text-white">Não há nenhuma fidelidade.</strong> Você pode cancelar quando quiser diretamente pelo WhatsApp. Ao cancelar, sua página segue ativa até o final do período mensal já pago.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pergunta 6 -->
+            <div class="py-5 sm:py-6 faq-item">
+              <button type="button" class="w-full flex items-center justify-between gap-4 text-left group faq-toggle" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-white group-hover:text-[#2EC97A] transition-colors leading-snug">
+                  O que acontece com o meu site se eu cancelar a assinatura?
+                </span>
+                <span class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#2EC97A]/40 transition-colors">
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white/60 group-hover:text-[#2EC97A] transition-transform duration-300 faq-icon"></iconify-icon>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden transition-all duration-300 max-h-0 pt-0 opacity-0">
+                <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                  Caso a assinatura seja pausada ou cancelada, o site sai do ar. No entanto, mantemos um backup completo de segurança guardado por até 6 meses. Se você quiser reativar no futuro, seu site volta ao ar exatamente como estava.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pergunta 7 -->
+            <div class="py-5 sm:py-6 faq-item">
+              <button type="button" class="w-full flex items-center justify-between gap-4 text-left group faq-toggle" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-white group-hover:text-[#2EC97A] transition-colors leading-snug">
+                  Por que o valor é tão mais barato do que o de uma agência tradicional?
+                </span>
+                <span class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#2EC97A]/40 transition-colors">
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white/60 group-hover:text-[#2EC97A] transition-transform duration-300 faq-icon"></iconify-icon>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden transition-all duration-300 max-h-0 pt-0 opacity-0">
+                <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                  Porque eliminamos o desperdício e a burocracia. Nosso modelo de assinatura em escala nos permite oferecer a mesma qualidade de uma grande agência, mas com um custo mensal acessível que cabe no bolso de pequenos e médios negócios.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pergunta 8 -->
+            <div class="py-5 sm:py-6 faq-item">
+              <button type="button" class="w-full flex items-center justify-between gap-4 text-left group faq-toggle" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-white group-hover:text-[#2EC97A] transition-colors leading-snug">
+                  Posso pedir alterações no site depois que ele estiver no ar?
+                </span>
+                <span class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#2EC97A]/40 transition-colors">
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-white/60 group-hover:text-[#2EC97A] transition-transform duration-300 faq-icon"></iconify-icon>
+                </span>
+              </button>
+              <div class="faq-content overflow-hidden transition-all duration-300 max-h-0 pt-0 opacity-0">
+                <p class="text-sm sm:text-base text-white/70 font-light leading-relaxed">
+                  <strong class="font-bold text-white">Sim!</strong> Dependendo do plano escolhido, você tem de 3 a 5 solicitações de alterações por mês (ajuste de textos, fotos, telefones, promoções) com suporte direto da nossa equipe em horário comercial.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <!-- FOOTER INSTITUCIONAL SITEONLAB -->
+  <footer class="bg-[#020504] border-t border-emerald-950/60 text-white relative overflow-hidden" id="rodape">
+    
+    <!-- Ambient Glow de Fundo -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-[#2EC97A]/05 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-6 pt-16 sm:pt-20 pb-12 relative z-10">
+      
+      <!-- GRID SUPERIOR: BRAND, LINKS & CANAIS OFICIAIS (Centralizado no mobile, alinhado à esquerda no desktop) -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 pb-14 border-b border-white/10 text-center md:text-left">
+        
+        <!-- Coluna 1: Logo & Slogan com quebra de linha solicitada (md:col-span-5) -->
+        <div class="md:col-span-5 space-y-4 text-center md:text-left flex flex-col items-center md:items-start">
+          <a href="#" class="inline-flex items-center group">
+            <img src="Assets/LOGOTIPO.png" alt="SiteOnLab Logo" class="h-8 md:h-9 w-auto object-contain transition-transform group-hover:scale-105">
+          </a>
+          <p class="text-sm text-white/60 font-light italic leading-relaxed">
+            Presença digital profissional<br>
+            e acessível para quem quer crescer.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Links de Navegação sem o termo 'Sitemap' (md:col-span-4) -->
+        <div class="md:col-span-4 space-y-3 text-center md:text-left flex flex-col items-center md:items-start">
+          <ul class="space-y-2.5 text-sm text-white/65 font-light">
+            <li>
+              <a href="#" class="hover:text-[#2EC97A] transition-colors flex items-center justify-center md:justify-start gap-2 group">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]/40 group-hover:bg-[#2EC97A] transition-colors"></span>
+                Início
+              </a>
+            </li>
+            <li>
+              <a href="#como-funciona" class="hover:text-[#2EC97A] transition-colors flex items-center justify-center md:justify-start gap-2 group">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]/40 group-hover:bg-[#2EC97A] transition-colors"></span>
+                Como Funciona
+              </a>
+            </li>
+            <li>
+              <a href="#planos" class="hover:text-[#2EC97A] transition-colors flex items-center justify-center md:justify-start gap-2 group">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A]/40 group-hover:bg-[#2EC97A] transition-colors"></span>
+                Planos e Preços
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/5512991757869?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20sobre%20o%20site%20por%20assinatura.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer" class="hover:text-[#2EC97A] transition-colors flex items-center justify-center md:justify-start gap-2 group text-[#2EC97A]/90 font-medium">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A] shadow-[0_0_8px_#2EC97A]"></span>
+                Falar com o suporte
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Canais Oficiais (md:col-span-3 - apenas ícones) -->
+        <div class="md:col-span-3 space-y-3.5 text-center md:text-left flex flex-col items-center md:items-start">
+          <h4 class="text-xs font-mono font-bold tracking-widest uppercase text-white/90">
+            Canais Oficiais
+          </h4>
+          <div class="flex items-center gap-3">
+            <a href="https://www.instagram.com/siteonlab.com.br" target="_blank" rel="noopener noreferrer" aria-label="Instagram da SiteOnLab" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-[#2EC97A]/60 hover:bg-[#2EC97A]/15 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm group">
+              <img src="Assets/icon-instagram.png" alt="Instagram" class="w-5 h-5 object-contain brightness-0 invert opacity-75 group-hover:opacity-100 group-hover:brightness-0 group-hover:invert-0 group-hover:sepia group-hover:saturate-[5000%] group-hover:hue-rotate-[90deg] transition-all">
+            </a>
+            <a href="https://www.linkedin.com/company/siteonlabbr" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn da SiteOnLab" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-[#2EC97A]/60 hover:bg-[#2EC97A]/15 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm group">
+              <img src="Assets/icon-linkedin.png" alt="LinkedIn" class="w-5 h-5 object-contain brightness-0 invert opacity-75 group-hover:opacity-100 group-hover:brightness-0 group-hover:invert-0 group-hover:sepia group-hover:saturate-[5000%] group-hover:hue-rotate-[90deg] transition-all">
+            </a>
+            <a href="https://wa.me/5512991757869?text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20sobre%20o%20site%20por%20assinatura.%20Pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Oficial da SiteOnLab" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-[#2EC97A]/60 hover:bg-[#2EC97A]/15 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm group">
+              <img src="Assets/icon-whatsapp.png" alt="WhatsApp" class="w-5 h-5 object-contain brightness-0 invert opacity-75 group-hover:opacity-100 group-hover:brightness-0 group-hover:invert-0 group-hover:sepia group-hover:saturate-[5000%] group-hover:hue-rotate-[90deg] transition-all">
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PARTE INFERIOR: AVISOS LEGAIS CENTRALIZADOS SEM ASTERISCOS & COPYRIGHT -->
+      <div class="pt-10 space-y-6 text-center">
+        
+        <!-- Disclaimers Centralizados em 2 Linhas -->
+        <div class="space-y-1.5 text-xs text-white/40 font-light leading-relaxed max-w-5xl mx-auto text-center px-4">
+          <p>
+            Resultados podem variar de acordo com o segmento, região e esforço comercial de cada empresa. Resultados financeiros não são garantidos.
+          </p>
+          <p>
+            Este site não faz parte do Facebook Inc., nem da Meta Platforms Inc., e não é endossado por essas empresas de nenhuma forma.
+          </p>
+        </div>
+
+        <!-- Copyright -->
+        <div class="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50 font-mono">
+          <p class="mx-auto sm:mx-0">
+            © 2026 SiteOnLab. Todos os direitos reservados.
+          </p>
+          <div class="flex items-center gap-2 text-[#2EC97A]/80 text-[11px] mx-auto sm:mx-0">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#2EC97A] animate-pulse"></span>
+            <span>Tecnologia & Conversão Contínua</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- Interactive Scripts (Parallax Mouse Follow, Spotlight, Counter & Typewriter) -->
+  <script>
+    (function() {
+      // 1. Mouse Parallax on Floating Cards (Only for cards with data-depth, preserving baseline offsets)
+      const heroSection = document.getElementById('hero-section');
+      const parallaxCards = heroSection ? heroSection.querySelectorAll('.parallax-card-float') : [];
+
+      if (heroSection && parallaxCards.length > 0) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const x = (e.clientX / window.innerWidth - 0.5) * 2;
+          const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+          parallaxCards.forEach(card => {
+            const depth = parseFloat(card.getAttribute('data-depth')) || 0.2;
+            const moveX = x * 20 * depth;
+            const moveY = y * 20 * depth;
+            card.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+          });
+        });
+
+        heroSection.addEventListener('mouseleave', () => {
+          parallaxCards.forEach(card => {
+            card.style.transform = `translate3d(0, 0, 0)`;
+          });
+        });
+      }
+
+      // 2. Spotlight cursor effect on cards
+      const spotlights = heroSection ? heroSection.querySelectorAll('.hero-spotlight') : [];
+      spotlights.forEach(spotlight => {
+        spotlight.addEventListener('mousemove', (e) => {
+          const rect = spotlight.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          spotlight.style.setProperty('--mouse-x', `${x}px`);
+          spotlight.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // 3. Counter Up Animation
+      const counters = heroSection ? heroSection.querySelectorAll('.counter-up') : [];
+      counters.forEach(counter => {
+        let start = 0;
+        const target = parseFloat(counter.getAttribute('data-target'));
+        const duration = 1800;
+        const increment = target / (duration / 16);
+
+        const updateCounter = () => {
+          start += increment;
+          if (start < target) {
+            counter.innerText = start.toFixed(1);
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.innerText = target.toFixed(1);
+          }
+        };
+        setTimeout(updateCounter, 600);
+      });
+
+      // 4. Subtle Typewriter rotating lead phrases (Desktop e Mobile sincronizados)
+      const phrases = [
+        '"Olá! Vi seu site no Google e gostaria de um orçamento..."',
+        '"Boa tarde! Achei vocês na pesquisa e quero fechar o serviço..."',
+        '"Conheci sua empresa pelo site institucional. Podemos conversar?"'
+      ];
+      let phraseIdx = 0;
+      let charIdx = 0;
+      let isDeleting = false;
+      const el = document.getElementById('typewriter');
+      const elMob = document.getElementById('typewriter-mob');
+
+      function type() {
+        if (!el && !elMob) return;
+        const current = phrases[phraseIdx];
+        const textVal = isDeleting ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
+        if (isDeleting) {
+          charIdx--;
+        } else {
+          charIdx++;
+        }
+
+        if (el) el.innerText = textVal;
+        if (elMob) el.innerText = textVal; // keep el in sync
+        if (elMob) elMob.innerText = textVal;
+
+        let speed = isDeleting ? 30 : 50;
+
+        if (!isDeleting && charIdx === current.length) {
+          speed = 3500;
+          isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          speed = 400;
+        }
+
+        setTimeout(type, speed);
+      }
+      setTimeout(type, 1000);
+
+      // 5. Progressive Opening Animation for Consequence Cards & Branches (Dobra 2)
+      const openingCards = document.querySelectorAll('.card-opening');
+      const branchLines = document.querySelectorAll('.tech-branch-line');
+      const truthSection = document.querySelector('.truth-reveal');
+      const techInteractiveBlock = document.getElementById('tech-interactive-block');
+
+      if ('IntersectionObserver' in window) {
+        // Observer para os Cards e Ramificações: aparecem um por vez ao rolar a página
+        let triggered = false;
+        const blockObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !triggered) {
+              triggered = true;
+              openingCards.forEach((card, idx) => {
+                setTimeout(() => {
+                  card.classList.add('is-visible');
+                  const branch = card.querySelector('.tech-branch-line');
+                  if (branch) branch.classList.add('is-visible');
+                  
+                  // Efeito de destaque momentâneo (foco no que acabou de entrar, outros borrados)
+                  card.classList.add('is-active');
+                  setTimeout(() => {
+                    card.classList.remove('is-active');
+                  }, 1200);
+                }, idx * 450); // Intervalo cadenciado de 450ms entre cada card
+              });
+            }
+          });
+        }, {
+          threshold: 0.25,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        if (techInteractiveBlock) {
+          blockObserver.observe(techInteractiveBlock);
+        } else {
+          openingCards.forEach(card => blockObserver.observe(card));
+        }
+
+        // Interação de hover nos cards para manter o foco e borrar os outros
+        openingCards.forEach(card => {
+          card.addEventListener('mouseenter', () => {
+            openingCards.forEach(c => c.classList.remove('is-active'));
+            card.classList.add('is-active');
+          });
+          card.addEventListener('mouseleave', () => {
+            card.classList.remove('is-active');
+          });
+        });
+
+        // Observer para "A Verdade Nua e Crua"
+        if (truthSection) {
+          const truthObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                truthSection.classList.add('is-visible');
+              }
+            });
+          }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -30px 0px'
+          });
+          truthObserver.observe(truthSection);
+        }
+      } else {
+        openingCards.forEach(card => card.classList.add('is-visible'));
+        branchLines.forEach(line => line.classList.add('is-visible'));
+        if (truthSection) truthSection.classList.add('is-visible');
+      }
+
+      // 6. Navigation Controls for Cases Carousel (Seção 5)
+      const casesCarousel = document.getElementById('cases-carousel');
+      const prevBtn = document.getElementById('cases-prev');
+      const nextBtn = document.getElementById('cases-next');
+
+      if (casesCarousel && prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+          casesCarousel.scrollBy({ left: -360, behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+          casesCarousel.scrollBy({ left: 360, behavior: 'smooth' });
+        });
+      }
+
+      // 7. Configuração dos Planos (Assinatura Mensal Ativa)
+      // Mantido simplificado para assinatura mensal recorrente sem fidelidade.
+
+      // 8. FAQ Accordion Interativo (Seção 13)
+      const faqItems = document.querySelectorAll('#faq-accordion .faq-item');
+      faqItems.forEach(item => {
+        const toggle = item.querySelector('.faq-toggle');
+        const content = item.querySelector('.faq-content');
+        const icon = item.querySelector('.faq-icon');
+
+        if (toggle && content && icon) {
+          toggle.addEventListener('click', () => {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+            // Opcional: fechar outros abertos
+            faqItems.forEach(otherItem => {
+              if (otherItem !== item) {
+                const otherToggle = otherItem.querySelector('.faq-toggle');
+                const otherContent = otherItem.querySelector('.faq-content');
+                const otherIcon = otherItem.querySelector('.faq-icon');
+                if (otherToggle && otherContent && otherIcon) {
+                  otherToggle.setAttribute('aria-expanded', 'false');
+                  otherContent.classList.remove('max-h-96', 'pt-3.5', 'opacity-100');
+                  otherContent.classList.add('max-h-0', 'pt-0', 'opacity-0');
+                  otherIcon.classList.remove('rotate-180');
+                }
+              }
+            });
+
+            if (isExpanded) {
+              toggle.setAttribute('aria-expanded', 'false');
+              content.classList.remove('max-h-96', 'pt-3.5', 'opacity-100');
+              content.classList.add('max-h-0', 'pt-0', 'opacity-0');
+              icon.classList.remove('rotate-180');
+            } else {
+              toggle.setAttribute('aria-expanded', 'true');
+              content.classList.remove('max-h-0', 'pt-0', 'opacity-0');
+              content.classList.add('max-h-96', 'pt-3.5', 'opacity-100');
+              icon.classList.add('rotate-180');
+            }
+          });
+        }
+      });
+
+      // 9. Hero Mockup Crossfade Carousel (Sites Clientes - Desktop e Mobile sincronizados)
+      const heroSlides = ['hero-mockup-0', 'hero-mockup-1', 'hero-mockup-2', 'hero-mockup-3'];
+      const heroMobSlides = ['hero-mockup-mob-0', 'hero-mockup-mob-1', 'hero-mockup-mob-2', 'hero-mockup-mob-3'];
+      let currentMockupIdx = 0;
+
+      if (document.getElementById('hero-mockup-0') || document.getElementById('hero-mockup-mob-0')) {
+        setInterval(() => {
+          const prevIdx = currentMockupIdx;
+          currentMockupIdx = (currentMockupIdx + 1) % heroSlides.length;
+
+          // Desktop slides
+          const prevEl = document.getElementById(heroSlides[prevIdx]);
+          const nextEl = document.getElementById(heroSlides[currentMockupIdx]);
+          if (prevEl && nextEl) {
+            prevEl.classList.remove('opacity-100', 'pointer-events-auto');
+            prevEl.classList.add('opacity-0', 'pointer-events-none');
+            nextEl.classList.remove('opacity-0', 'pointer-events-none');
+            nextEl.classList.add('opacity-100', 'pointer-events-auto');
+          }
+
+          // Mobile slides
+          const prevMobEl = document.getElementById(heroMobSlides[prevIdx]);
+          const nextMobEl = document.getElementById(heroMobSlides[currentMockupIdx]);
+          if (prevMobEl && nextMobEl) {
+            prevMobEl.classList.remove('opacity-100', 'pointer-events-auto');
+            prevMobEl.classList.add('opacity-0', 'pointer-events-none');
+            nextMobEl.classList.remove('opacity-0', 'pointer-events-none');
+            nextMobEl.classList.add('opacity-100', 'pointer-events-auto');
+          }
+        }, 3800);
+      }
+
+      // 10. Play Overlay Interativo no Vídeo Manifesto
+      const videoWrapper = document.getElementById('video-wrapper');
+      const videoOverlay = document.getElementById('video-play-overlay');
+      const vimeoPlayer = document.getElementById('vimeo-player');
+
+      if (videoWrapper && videoOverlay && vimeoPlayer) {
+        videoWrapper.addEventListener('click', () => {
+          videoOverlay.style.opacity = '0';
+          videoOverlay.style.pointerEvents = 'none';
+          
+          let currentSrc = vimeoPlayer.getAttribute('src') || '';
+          if (!currentSrc.includes('autoplay=1')) {
+            const separator = currentSrc.includes('?') ? '&' : '?';
+            vimeoPlayer.setAttribute('src', currentSrc + separator + 'autoplay=1');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
